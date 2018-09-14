@@ -1,0 +1,14 @@
+"*":
+  core:
+    telemetryConsent: "limited"
+    themes: [
+      "atom-dark-ui"
+      "autumn-highlighter-syntax"
+    ]
+  editor: {}
+  "exception-reporting":
+    userId: "7c7738cb-6571-4299-aab6-d37e7e3b3804"
+  "remove-all-keybindings":
+    exceptPlatformKeymap: false
+  welcome:
+    showOnStartup: false
