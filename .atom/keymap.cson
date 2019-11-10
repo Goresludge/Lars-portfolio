@@ -1,0 +1,10 @@
+'body':
+  'alt-j': 'core:move-left'
+  'alt-k': 'core:move-down'
+  'alt-l': 'core:move-right'
+  'alt-i': 'core:move-up'
+  'alt-u': 'editor:move-to-beginning-of-line'
+  'alt-o': 'editor:move-to-end-of-line'
+  'alt-m': 'mark:toggle'
+  'alt-n': 'mark:select-to-mark'
+  'alt-c': 'mark:clear-mark'
