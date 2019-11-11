@@ -30,6 +30,7 @@ public class TestGame {
         mediaPlayer.play();
         grid.getChildren().add(buttonBack);
         buttonBack.setOnAction(e -> {
+            grid.getChildren().clear();
             mediaPlayer.stop();
             GameShowPanel.display(window,grid);
         });

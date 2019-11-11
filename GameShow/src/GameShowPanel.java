@@ -15,38 +15,39 @@ import java.io.File;
 class GameShowPanel {
 
     private static Button game1 = new Button("1");
-    static Button game2 = new Button("2");
-    static Button game3 = new Button("3");
-    static Button game4 = new Button("4");
-    static Button game5 = new Button("5");
-    static Button game6 = new Button("6");
-    static Button game7 = new Button("7");
-    static Button game8 = new Button("8");
-    static Button game9 = new Button("9");
-    static Button game10 = new Button("10");
-    static Button game11 = new Button("11");
-    static Button game12 = new Button("12");
-    static Button game13 = new Button("13");
-    static Button game14 = new Button("14");
-    static Button game15 = new Button("15");
-    static Button game16 = new Button("16");
-    static Button game17 = new Button("17");
-    static Button game18 = new Button("18");
-    static Button game19 = new Button("19");
-    static Button game20 = new Button("20");
-    static Button game21 = new Button("21");
-    static Button game22 = new Button("22");
-    static Button game23 = new Button("23");
-    static Button game24 = new Button("24");
-    static Button game25 = new Button("25");
+    private static Button game2 = new Button("2");
+    private static Button game3 = new Button("3");
+    private static Button game4 = new Button("4");
+    private static Button game5 = new Button("5");
+    private static Button game6 = new Button("6");
+    private static Button game7 = new Button("7");
+    private static Button game8 = new Button("8");
+    private static Button game9 = new Button("9");
+    private static Button game10 = new Button("10");
+    private static Button game11 = new Button("11");
+    private static Button game12 = new Button("12");
+    private static Button game13 = new Button("13");
+    private static Button game14 = new Button("14");
+    private static Button game15 = new Button("15");
+    private static Button game16 = new Button("16");
+    private static Button game17 = new Button("17");
+    private static Button game18 = new Button("18");
+    private static Button game19 = new Button("19");
+    private static Button game20 = new Button("20");
+    private static Button game21 = new Button("21");
+    private static Button game22 = new Button("22");
+    private static Button game23 = new Button("23");
+    private static Button game24 = new Button("24");
+    private static Button game25 = new Button("25");
 
     static void display(Stage window, GridPane grid){
 
         setupPanel(grid);
 
-
         game1.setOnAction(e-> {
-            grid.getChildren().remove(game1);
+            grid.getChildren().clear();
+            grid.getColumnConstraints().clear();
+            grid.getRowConstraints().clear();
             TestGame.display(window,grid);
         });
 
@@ -60,11 +61,119 @@ class GameShowPanel {
         grid.setVgap(8);
         grid.setHgap(10);
 
+        GridPane.setConstraints(game1,1,0);
+        GridPane.setConstraints(game2,2,0);
+        GridPane.setConstraints(game3,3,0);
+        GridPane.setConstraints(game4,4,0);
+        GridPane.setConstraints(game5,5,0);
+        GridPane.setConstraints(game6,1,1);
+        GridPane.setConstraints(game7,2,1);
+        GridPane.setConstraints(game8,3,1);
+        GridPane.setConstraints(game9,4,1);
+        GridPane.setConstraints(game10,5,1);
+        GridPane.setConstraints(game11,1,2);
+        GridPane.setConstraints(game12,2,2);
+        GridPane.setConstraints(game13,3,2);
+        GridPane.setConstraints(game14,4,2);
+        GridPane.setConstraints(game15,5,2);
+        GridPane.setConstraints(game16,1,3);
+        GridPane.setConstraints(game17,2,3);
+        GridPane.setConstraints(game18,3,3);
+        GridPane.setConstraints(game19,4,3);
+        GridPane.setConstraints(game20,5,3);
+        GridPane.setConstraints(game21,1,4);
+        GridPane.setConstraints(game22,2,4);
+        GridPane.setConstraints(game23,3,4);
+        GridPane.setConstraints(game24,4,4);
+        GridPane.setConstraints(game25,5,4);
+
+        GridPane.setFillWidth(game1,true);
+        GridPane.setFillWidth(game2,true);
+        GridPane.setFillWidth(game3,true);
+        GridPane.setFillWidth(game4,true);
+        GridPane.setFillWidth(game5,true);
+        GridPane.setFillWidth(game6,true);
+        GridPane.setFillWidth(game7,true);
+        GridPane.setFillWidth(game8,true);
+        GridPane.setFillWidth(game9,true);
+        GridPane.setFillWidth(game10,true);
+        GridPane.setFillWidth(game11,true);
+        GridPane.setFillWidth(game12,true);
+        GridPane.setFillWidth(game13,true);
+        GridPane.setFillWidth(game14,true);
+        GridPane.setFillWidth(game15,true);
+        GridPane.setFillWidth(game16,true);
+        GridPane.setFillWidth(game17,true);
+        GridPane.setFillWidth(game18,true);
+        GridPane.setFillWidth(game19,true);
+        GridPane.setFillWidth(game20,true);
+        GridPane.setFillWidth(game21,true);
+        GridPane.setFillWidth(game22,true);
+        GridPane.setFillWidth(game23,true);
+        GridPane.setFillWidth(game24,true);
+        GridPane.setFillWidth(game25,true);
+
+
+        GridPane.setFillHeight(game1,true);
+        GridPane.setFillHeight(game2,true);
+        GridPane.setFillHeight(game3,true);
+        GridPane.setFillHeight(game4,true);
+        GridPane.setFillHeight(game5,true);
+        GridPane.setFillHeight(game6,true);
+        GridPane.setFillHeight(game7,true);
+        GridPane.setFillHeight(game8,true);
+        GridPane.setFillHeight(game9,true);
+        GridPane.setFillHeight(game10,true);
+        GridPane.setFillHeight(game11,true);
+        GridPane.setFillHeight(game12,true);
+        GridPane.setFillHeight(game13,true);
+        GridPane.setFillHeight(game14,true);
+        GridPane.setFillHeight(game15,true);
+        GridPane.setFillHeight(game16,true);
+        GridPane.setFillHeight(game17,true);
+        GridPane.setFillHeight(game18,true);
+        GridPane.setFillHeight(game19,true);
+        GridPane.setFillHeight(game20,true);
+        GridPane.setFillHeight(game21,true);
+        GridPane.setFillHeight(game22,true);
+        GridPane.setFillHeight(game23,true);
+        GridPane.setFillHeight(game24,true);
+        GridPane.setFillHeight(game25,true);
+
+        game1.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game2.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game3.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game4.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game5.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game6.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game7.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game8.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game9.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game10.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game11.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game12.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game13.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game14.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game15.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game16.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game17.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game18.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game19.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game20.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game21.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game22.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game23.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game24.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        game25.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
 
         Label lagnamn1 = new Label(StartScreen.getLagnamn1());
+        GridPane.setConstraints(lagnamn1,0,0);
         Label lagnamn2 = new Label(StartScreen.getLagnamn2());
-        grid.add(lagnamn1,0,0);
-        grid.add(lagnamn2,6,0);
+        GridPane.setConstraints(lagnamn1,6,0);
+        grid.getChildren().addAll(lagnamn1,lagnamn2,game1,game2,game3,
+                game4,game5,game6,game7,game8,game9,game10,game11,game12,
+                game13,game14,game15,game16,game17,game18,game19,game20,
+                game21,game22,game23,game24,game25);
 
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(15);
