@@ -39,6 +39,7 @@ class GameShowPanel {
     private static Button game23 = new Button("23");
     private static Button game24 = new Button("24");
     private static Button game25 = new Button("25");
+    private static Button[] buttons;
 
     static void display(Stage window, GridPane grid){
 
@@ -55,116 +56,52 @@ class GameShowPanel {
 
     private static void setupPanel(GridPane grid){
 
+        buttons = new Button[25];
+        buttons[0] = game1;
+        buttons[1] = game2;
+        buttons[2] = game3;
+        buttons[3] = game4;
+        buttons[4] = game5;
+        buttons[5] = game6;
+        buttons[6] = game7;
+        buttons[7] = game8;
+        buttons[8] = game9;
+        buttons[9] = game10;
+        buttons[10] = game11;
+        buttons[11] = game12;
+        buttons[12] = game13;
+        buttons[13] = game14;
+        buttons[14] = game15;
+        buttons[15] = game16;
+        buttons[16] = game17;
+        buttons[17] = game18;
+        buttons[18] = game19;
+        buttons[19] = game20;
+        buttons[20] = game21;
+        buttons[21] = game22;
+        buttons[22] = game23;
+        buttons[23] = game24;
+        buttons[24] = game25;
 
         grid.setGridLinesVisible(true);
         grid.setPadding(new Insets(10,10,10,10));
         grid.setVgap(8);
         grid.setHgap(10);
 
-        GridPane.setConstraints(game1,1,0);
-        GridPane.setConstraints(game2,2,0);
-        GridPane.setConstraints(game3,3,0);
-        GridPane.setConstraints(game4,4,0);
-        GridPane.setConstraints(game5,5,0);
-        GridPane.setConstraints(game6,1,1);
-        GridPane.setConstraints(game7,2,1);
-        GridPane.setConstraints(game8,3,1);
-        GridPane.setConstraints(game9,4,1);
-        GridPane.setConstraints(game10,5,1);
-        GridPane.setConstraints(game11,1,2);
-        GridPane.setConstraints(game12,2,2);
-        GridPane.setConstraints(game13,3,2);
-        GridPane.setConstraints(game14,4,2);
-        GridPane.setConstraints(game15,5,2);
-        GridPane.setConstraints(game16,1,3);
-        GridPane.setConstraints(game17,2,3);
-        GridPane.setConstraints(game18,3,3);
-        GridPane.setConstraints(game19,4,3);
-        GridPane.setConstraints(game20,5,3);
-        GridPane.setConstraints(game21,1,4);
-        GridPane.setConstraints(game22,2,4);
-        GridPane.setConstraints(game23,3,4);
-        GridPane.setConstraints(game24,4,4);
-        GridPane.setConstraints(game25,5,4);
-
-        GridPane.setFillWidth(game1,true);
-        GridPane.setFillWidth(game2,true);
-        GridPane.setFillWidth(game3,true);
-        GridPane.setFillWidth(game4,true);
-        GridPane.setFillWidth(game5,true);
-        GridPane.setFillWidth(game6,true);
-        GridPane.setFillWidth(game7,true);
-        GridPane.setFillWidth(game8,true);
-        GridPane.setFillWidth(game9,true);
-        GridPane.setFillWidth(game10,true);
-        GridPane.setFillWidth(game11,true);
-        GridPane.setFillWidth(game12,true);
-        GridPane.setFillWidth(game13,true);
-        GridPane.setFillWidth(game14,true);
-        GridPane.setFillWidth(game15,true);
-        GridPane.setFillWidth(game16,true);
-        GridPane.setFillWidth(game17,true);
-        GridPane.setFillWidth(game18,true);
-        GridPane.setFillWidth(game19,true);
-        GridPane.setFillWidth(game20,true);
-        GridPane.setFillWidth(game21,true);
-        GridPane.setFillWidth(game22,true);
-        GridPane.setFillWidth(game23,true);
-        GridPane.setFillWidth(game24,true);
-        GridPane.setFillWidth(game25,true);
-
-
-        GridPane.setFillHeight(game1,true);
-        GridPane.setFillHeight(game2,true);
-        GridPane.setFillHeight(game3,true);
-        GridPane.setFillHeight(game4,true);
-        GridPane.setFillHeight(game5,true);
-        GridPane.setFillHeight(game6,true);
-        GridPane.setFillHeight(game7,true);
-        GridPane.setFillHeight(game8,true);
-        GridPane.setFillHeight(game9,true);
-        GridPane.setFillHeight(game10,true);
-        GridPane.setFillHeight(game11,true);
-        GridPane.setFillHeight(game12,true);
-        GridPane.setFillHeight(game13,true);
-        GridPane.setFillHeight(game14,true);
-        GridPane.setFillHeight(game15,true);
-        GridPane.setFillHeight(game16,true);
-        GridPane.setFillHeight(game17,true);
-        GridPane.setFillHeight(game18,true);
-        GridPane.setFillHeight(game19,true);
-        GridPane.setFillHeight(game20,true);
-        GridPane.setFillHeight(game21,true);
-        GridPane.setFillHeight(game22,true);
-        GridPane.setFillHeight(game23,true);
-        GridPane.setFillHeight(game24,true);
-        GridPane.setFillHeight(game25,true);
-
-        game1.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game2.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game3.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game4.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game5.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game6.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game7.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game8.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game9.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game10.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game11.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game12.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game13.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game14.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game15.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game16.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game17.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game18.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game19.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game20.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game21.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game22.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game23.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game24.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-        game25.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        int i = 1;
+        int j = 0;
+        for (Button b:buttons
+             ) {
+            GridPane.setConstraints(b,i,j);
+            GridPane.setFillWidth(b,true);
+            GridPane.setFillHeight(b,true);
+            b.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+            i++;
+            if(i == 6){
+                j++;
+                i = 1;
+            }
+        }
 
         Label lagnamn1 = new Label(StartScreen.getLagnamn1());
         GridPane.setConstraints(lagnamn1,0,0);
