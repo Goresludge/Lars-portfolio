@@ -12,9 +12,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
-public class GameShowPanel {
+class GameShowPanel {
 
-    static Button game1 = new Button("1");
+    private static Button game1 = new Button("1");
     static Button game2 = new Button("2");
     static Button game3 = new Button("3");
     static Button game4 = new Button("4");
@@ -40,7 +40,7 @@ public class GameShowPanel {
     static Button game24 = new Button("24");
     static Button game25 = new Button("25");
 
-    public static void display(Stage window,GridPane grid){
+    static void display(Stage window, GridPane grid){
 
         setupPanel(grid);
 
@@ -64,12 +64,22 @@ public class GameShowPanel {
         Label lagnamn1 = new Label(StartScreen.getLagnamn1());
         Label lagnamn2 = new Label(StartScreen.getLagnamn2());
         grid.add(lagnamn1,0,0);
-        grid.add(lagnamn2,1,0);
+        grid.add(lagnamn2,6,0);
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(50);
+        col1.setPercentWidth(15);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(50);
+        col2.setPercentWidth(14);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(14);
+        ColumnConstraints col4 = new ColumnConstraints();
+        col4.setPercentWidth(14);
+        ColumnConstraints col5 = new ColumnConstraints();
+        col5.setPercentWidth(14);
+        ColumnConstraints col6 = new ColumnConstraints();
+        col6.setPercentWidth(14);
+        ColumnConstraints col7 = new ColumnConstraints();
+        col7.setPercentWidth(15);
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(20);
         RowConstraints row2 = new RowConstraints();
@@ -81,7 +91,7 @@ public class GameShowPanel {
         RowConstraints row5 = new RowConstraints();
         row5.setPercentHeight(20);
         grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
-        grid.getColumnConstraints().addAll(col1,col2);
+        grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
 
         grid.setGridLinesVisible(true);
 
