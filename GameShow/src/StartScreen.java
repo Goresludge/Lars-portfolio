@@ -34,7 +34,7 @@ public class StartScreen {
 
         scene.getStylesheets().add("style.css");
 
-
+        /*
         ImageView karran = new ImageView("karran.jpg");
         karran.setFitHeight(200);
         karran.setFitWidth(200);
@@ -44,7 +44,7 @@ public class StartScreen {
         rotate.play();
         GridPane.setHalignment(karran,HPos.CENTER);
         grid.getChildren().addAll(karran);
-
+*/
         setUpLayout(grid,lagnamn1Input1,lagnamn1Input2,buttonPlay);
 
         String musicFile = "StartMusic.mp3";
