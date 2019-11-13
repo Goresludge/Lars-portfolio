@@ -4,8 +4,13 @@
     <list default="true" id="f5f53ddb-4d9f-4dea-ab83-1625ec342649" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GameShow/GameShowPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameShow/GameShowPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GameShow/TestGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameShow/TestGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameShow/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameShow/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameShow/TestGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GameShow/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GameShow/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameShowPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameShowPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/StartScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="StartScreen.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="175">
+              <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -38,11 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameShowPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameShowPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameShowPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="97" column="58" selection-start-line="97" selection-start-column="58" selection-end-line="97" selection-end-column="58" />
+            <state relative-caret-position="204">
+              <caret line="90" column="36" lean-forward="true" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,14 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestGame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/TestGame.java">
+      <file leaf-file-name="StreetFighterDuel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="357">
+              <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -92,11 +103,12 @@
         <option value="$PROJECT_DIR$/src/AlertBox.java" />
         <option value="$PROJECT_DIR$/src/testGame.java" />
         <option value="$PROJECT_DIR$/src/JavaFXApplication9.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/TestGame.java" />
+        <option value="$PROJECT_DIR$/src/StreetFighterDuel.java" />
+        <option value="$PROJECT_DIR$/src/GameShowPanel.java" />
         <option value="$PROJECT_DIR$/src/style.css" />
         <option value="$PROJECT_DIR$/src/StartScreen.java" />
-        <option value="$PROJECT_DIR$/src/TestGame.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/GameShowPanel.java" />
       </list>
     </option>
   </component>
@@ -114,11 +126,31 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="GameShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameShow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameShow" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameShow" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GameShow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GameShow" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
               <item name="GameShow" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -131,8 +163,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -142,6 +172,9 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\larsp\Desktop\mystuff\GameShow\src" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
@@ -256,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573434629362</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Rensat kod">
+      <created>1573503432900</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573503432900</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -297,9 +337,119 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixat lite i gameshowpanel" />
     <MESSAGE value="Added buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added buttons" />
+    <MESSAGE value="Rensat kod" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rensat kod" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="37" selection-start-line="37" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameShowPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameShowPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameShowPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="104" lean-forward="true" selection-start-line="104" selection-end-line="104" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -317,13 +467,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGame.java">
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -354,13 +501,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGame.java">
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="21" column="58" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -391,13 +535,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGame.java">
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -418,13 +559,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGame.java">
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -452,13 +590,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGame.java">
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -499,23 +634,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/JavaFXApplication9.java" />
-    <entry file="file://$PROJECT_DIR$/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -523,20 +641,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
+    <entry file="file://$PROJECT_DIR$/src/GameShowPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="204">
+          <caret line="90" column="36" lean-forward="true" selection-start-line="90" selection-start-column="36" selection-end-line="90" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameShowPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="97" column="58" selection-start-line="97" selection-start-column="58" selection-end-line="97" selection-end-column="58" />
+        <state relative-caret-position="340">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StreetFighterDuel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="35" column="8" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/karran.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

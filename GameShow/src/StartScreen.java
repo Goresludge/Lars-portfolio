@@ -1,17 +1,25 @@
+import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.File;
 
 public class StartScreen {
 
     private static TextField lagnamn1Input1 = new TextField("Lagnamn");
     private static TextField lagnamn1Input2 = new TextField("Lagnamn");
-    private static Button buttonPlay = new Button("Play");
+    private static Button buttonPlay = new Button("KÖR IGÅNG SPELET");
 
     public static void display(Stage window, Stage primaryStage) {
 
@@ -23,16 +31,39 @@ public class StartScreen {
         GridPane grid = new GridPane();
 
         Scene scene = new Scene(grid,700,500);
-        //scene.getStylesheets().add("style.css");
+
+        scene.getStylesheets().add("style.css");
+
+
+        ImageView karran = new ImageView("karran.jpg");
+        karran.setFitHeight(200);
+        karran.setFitWidth(200);
+        RotateTransition rotate = new RotateTransition(Duration.millis(1000), karran);
+        rotate.setByAngle(360);
+        rotate.setCycleCount(500);
+        rotate.play();
+        GridPane.setHalignment(karran,HPos.CENTER);
+        grid.getChildren().addAll(karran);
 
         setUpLayout(grid,lagnamn1Input1,lagnamn1Input2,buttonPlay);
 
+        String musicFile = "StartMusic.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        mediaPlayer.play();
+
+        scene.getStylesheets().add("style.css");
+        buttonPlay.setId("startButton");
+        grid.setId("startScreen");
 
         Stage finalWindow = window;
         buttonPlay.setOnAction(e -> {
             grid.getChildren().clear();
             grid.getColumnConstraints().clear();
             grid.getRowConstraints().clear();
+            grid.setId("null");
+            mediaPlayer.stop();
             GameShowPanel.display(finalWindow,grid);
         });
         window.setScene(scene);
@@ -57,6 +88,9 @@ public class StartScreen {
         grid.setHgap(10);
 
 
+        lagnamn1Input1.setId("input");
+        lagnamn1Input2.setId("input");
+
         GridPane.setFillWidth(buttonPlay,true);
         GridPane.setFillHeight(buttonPlay,true);
 
@@ -71,13 +105,13 @@ public class StartScreen {
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(40);
         RowConstraints row1 = new RowConstraints();
-        row1.setPercentHeight(33);
+        row1.setPercentHeight(50);
         ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(20);
         ColumnConstraints column3 = new ColumnConstraints();
         column3.setPercentWidth(40);
         RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(33);
+        row2.setPercentHeight(17);
         RowConstraints row3 = new RowConstraints();
         row3.setPercentHeight(33);
 

@@ -1,16 +1,10 @@
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
 
 class GameShowPanel {
 
@@ -49,7 +43,7 @@ class GameShowPanel {
             grid.getChildren().clear();
             grid.getColumnConstraints().clear();
             grid.getRowConstraints().clear();
-            TestGame.display(window,grid);
+            StreetFighterDuel.display(window,grid);
         });
 
     }
@@ -83,7 +77,6 @@ class GameShowPanel {
         buttons[23] = game24;
         buttons[24] = game25;
 
-        grid.setGridLinesVisible(true);
         grid.setPadding(new Insets(10,10,10,10));
         grid.setVgap(8);
         grid.setHgap(10);
@@ -95,6 +88,7 @@ class GameShowPanel {
             GridPane.setConstraints(b,i,j);
             GridPane.setFillWidth(b,true);
             GridPane.setFillHeight(b,true);
+            b.setId("panelButtons");
             b.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
             i++;
             if(i == 6){
@@ -138,8 +132,6 @@ class GameShowPanel {
         row5.setPercentHeight(20);
         grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
         grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
-
-        grid.setGridLinesVisible(true);
 
     }
 }

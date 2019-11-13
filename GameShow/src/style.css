@@ -1,5 +1,39 @@
 .root{
-   -fx-background-image: url('background.jpg');
-   -fx-background-repeat: stretch;
+    -fx-background-color: #7fb867;
+}
+
+#startScreen{
+    -fx-background-image: url("logo.png");
+    -fx-background-position: top center;
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1500 706;
+}
+
+#panelButtons{
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+}
+
+#input{
+    -fx-font-weight: bold;
+    -fx-font-size: 50px;
+    -fx-pref-width: 500;
+    -fx-pref-height: 100;
+    -fx-padding: 5 5 5 5;
+}
+
+.label{
+    -fx-font-weight: bold;
+    -fx-font-size: 40px;
+}
+
+#startButton{
+    -fx-font-weight: bold;
+    -fx-font-size: 120px;
+}
+
+#StreetFighter{
+   -fx-background-image: url('StreetFighter.jpg');
+   -fx-background-size: cover;
    -fx-background-position: center center;
 }
