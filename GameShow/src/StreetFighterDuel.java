@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,33 +19,79 @@ public class StreetFighterDuel {
 
 
 
-    public static void display(Stage window, GridPane grid){
+    public static void display(GridPane grid){
 
-        Button buttonBack = null;
-        buttonBack = new Button("Stop");
+        Button lagA;
+        Button lagB;
+        lagA = new Button(StartScreen.getLagnamn1());
+        lagB = new Button(StartScreen.getLagnamn2());
 
-
-
-        BackgroundImage myBI= new BackgroundImage(new Image("StreetFighter.jpg",window.getWidth(),window.getHeight(),false,true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-
-        grid.setBackground(new Background(myBI));
-
-        /*
         grid.setId("StreetFighter");
-        scene.getStylesheets().add("style.css");
-*/
+
         String musicFile = "StreetFighter.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-        grid.getChildren().add(buttonBack);
-        buttonBack.setOnAction(e -> {
+
+        setupScreen(grid,lagA,lagB);
+        lagA.setOnAction(e -> {
             grid.getChildren().clear();
+            grid.getColumnConstraints().clear();
+            grid.getRowConstraints().clear();
             mediaPlayer.stop();
             grid.setBackground(null);
-            GameShowPanel.display(window,grid);
+            GameShowPanel.result(grid,3,0);
         });
+        lagB.setOnAction(e -> {
+            grid.getChildren().clear();
+            grid.getColumnConstraints().clear();
+            grid.getRowConstraints().clear();
+            mediaPlayer.stop();
+            grid.setBackground(null);
+            GameShowPanel.result(grid,0,3);
+        });
+    }
+
+    private static void setupScreen(GridPane grid,Button lagA,Button lagB){
+
+        GridPane.setConstraints(lagA,0,4);
+        GridPane.setConstraints(lagB,6,4);
+        GridPane.setHalignment(lagA,HPos.CENTER);
+        GridPane.setHalignment(lagB,HPos.CENTER);
+
+        lagA.setId("teamButtons");
+        lagB.setId("teamButtons");
+
+        GridPane.setFillWidth(lagA,true);
+        GridPane.setFillWidth(lagB,true);
+
+        grid.getChildren().addAll(lagA,lagB);
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(15);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(14);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(14);
+        ColumnConstraints col4 = new ColumnConstraints();
+        col4.setPercentWidth(14);
+        ColumnConstraints col5 = new ColumnConstraints();
+        col5.setPercentWidth(14);
+        ColumnConstraints col6 = new ColumnConstraints();
+        col6.setPercentWidth(14);
+        ColumnConstraints col7 = new ColumnConstraints();
+        col7.setPercentWidth(15);
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(20);
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(20);
+        RowConstraints row3 = new RowConstraints();
+        row3.setPercentHeight(20);
+        RowConstraints row4 = new RowConstraints();
+        row4.setPercentHeight(20);
+        RowConstraints row5 = new RowConstraints();
+        row5.setPercentHeight(20);
+        grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
+        grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
     }
 }

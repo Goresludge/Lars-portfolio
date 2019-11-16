@@ -21,20 +21,19 @@ public class StartScreen {
     private static TextField lagnamn1Input2 = new TextField("Lagnamn");
     private static Button buttonPlay = new Button("KÖR IGÅNG SPELET");
 
-    public static void display(Stage window, Stage primaryStage) {
+    public static void display(Stage primaryStage) {
 
 
-        window = primaryStage;
-        window.setTitle("GAME SHOW!!");
 
+        primaryStage.setTitle("GAME SHOW!!");
 
         GridPane grid = new GridPane();
-
         Scene scene = new Scene(grid,700,500);
+
 
         scene.getStylesheets().add("style.css");
 
-        /*
+/*
         ImageView karran = new ImageView("karran.jpg");
         karran.setFitHeight(200);
         karran.setFitWidth(200);
@@ -53,22 +52,19 @@ public class StartScreen {
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
 
-        scene.getStylesheets().add("style.css");
         buttonPlay.setId("startButton");
         grid.setId("startScreen");
 
-        Stage finalWindow = window;
         buttonPlay.setOnAction(e -> {
             grid.getChildren().clear();
             grid.getColumnConstraints().clear();
             grid.getRowConstraints().clear();
             grid.setId("null");
-            mediaPlayer.stop();
-            GameShowPanel.display(finalWindow,grid);
+            GameShowPanel.display(grid);
         });
-        window.setScene(scene);
-        window.show();
-        window.setFullScreen(true);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        primaryStage.setFullScreen(true);
 
     }
 

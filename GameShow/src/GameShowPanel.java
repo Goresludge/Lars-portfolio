@@ -1,10 +1,17 @@
+import com.sun.deploy.util.ArrayUtil;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.File;
 
 class GameShowPanel {
 
@@ -33,24 +40,59 @@ class GameShowPanel {
     private static Button game23 = new Button("23");
     private static Button game24 = new Button("24");
     private static Button game25 = new Button("25");
-    private static Button[] buttons;
+    private static Button[] buttons = new Button[25];
+    private static Label labelPointLag1 = new Label("Poäng: 0");
+    private static Label labelPointLag2 = new Label("Poäng: 0");
+    private static int pointsLag1;
+    private static int pointsLag2;
+    private static Label lagnamn1 = new Label(StartScreen.getLagnamn1());
+    private static Label lagnamn2 = new Label(StartScreen.getLagnamn2());
 
-    static void display(Stage window, GridPane grid){
+    static void display(GridPane grid){
 
         setupPanel(grid);
+
+        String musicFile = "StartMusic.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        mediaPlayer.play();
 
         game1.setOnAction(e-> {
             grid.getChildren().clear();
             grid.getColumnConstraints().clear();
             grid.getRowConstraints().clear();
-            StreetFighterDuel.display(window,grid);
+            mediaPlayer.stop();
+            StreetFighterDuel.display(grid);
+            game1.setId("selectedButton");
+            game1.setDisable(true);
         });
 
+        game2.setOnAction(e-> {
+            grid.getChildren().clear();
+            grid.getColumnConstraints().clear();
+            grid.getRowConstraints().clear();
+            mediaPlayer.stop();
+            GuessWord.display(grid);
+            game1.setId("selectedButton");
+            game1.setDisable(true);
+        });
+    }
+
+    static void result(GridPane grid, int a, int b){
+
+        pointsLag1 += a;
+        pointsLag2 += b;
+        labelPointLag1.setText("Poäng: " + Integer.toString(pointsLag1));
+        labelPointLag2.setText("Poäng: " + Integer.toString(pointsLag2));
+
+        display(grid);
     }
 
     private static void setupPanel(GridPane grid){
 
-        buttons = new Button[25];
+        grid.setId("root");
+
         buttons[0] = game1;
         buttons[1] = game2;
         buttons[2] = game3;
@@ -83,12 +125,14 @@ class GameShowPanel {
 
         int i = 1;
         int j = 0;
-        for (Button b:buttons
+        for (Button b: buttons
              ) {
             GridPane.setConstraints(b,i,j);
             GridPane.setFillWidth(b,true);
             GridPane.setFillHeight(b,true);
-            b.setId("panelButtons");
+            if(!b.isDisabled()){
+                b.setId("panelButtons");
+            }
             b.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
             i++;
             if(i == 6){
@@ -97,11 +141,21 @@ class GameShowPanel {
             }
         }
 
-        Label lagnamn1 = new Label(StartScreen.getLagnamn1());
+
+        labelPointLag1.setId("points");
+        labelPointLag2.setId("points");
+        GridPane.setConstraints(labelPointLag1,0,1);
+        GridPane.setConstraints(labelPointLag2,6,1);
+        GridPane.setHalignment(labelPointLag1,HPos.CENTER);
+        GridPane.setHalignment(labelPointLag2,HPos.CENTER);
+
         GridPane.setConstraints(lagnamn1,0,0);
-        Label lagnamn2 = new Label(StartScreen.getLagnamn2());
-        GridPane.setConstraints(lagnamn1,6,0);
-        grid.getChildren().addAll(lagnamn1,lagnamn2,game1,game2,game3,
+        GridPane.setConstraints(lagnamn2,6,0);
+        GridPane.setHalignment(lagnamn1,HPos.CENTER);
+        GridPane.setHalignment(lagnamn2,HPos.CENTER);
+
+
+        grid.getChildren().addAll(lagnamn1,lagnamn2,labelPointLag1,labelPointLag2,game1,game2,game3,
                 game4,game5,game6,game7,game8,game9,game10,game11,game12,
                 game13,game14,game15,game16,game17,game18,game19,game20,
                 game21,game22,game23,game24,game25);
@@ -132,6 +186,8 @@ class GameShowPanel {
         row5.setPercentHeight(20);
         grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
         grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
+
+
 
     }
 }
