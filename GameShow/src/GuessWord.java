@@ -1,17 +1,25 @@
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
 
 import java.io.File;
 
 public class GuessWord {
 
     public static void display(GridPane grid){
+
+        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent key) {
+                System.out.println("Key Pressed: " + key.getCode());
+            }
+        });
 
         Button lagA;
         Button lagB;
@@ -114,6 +122,20 @@ public class GuessWord {
     }
 
     private static void wordGame(GridPane grid){
-
+        String testString = "Ett test";
+        for(int i = 0; i < testString.length(); i++){
+            if(Character.isLetter(testString.charAt(i))){
+                String s = String.valueOf(testString.charAt(i));
+                Button b = new Button(s);
+                b.setId("guessWord");
+                GridPane.setFillWidth(b,true);
+                GridPane.setFillHeight(b,true);
+                b.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+                grid.add(b,i+1,1);
+            }
+            else {
+                Button b = new Button(" ");
+            }
+        }
     }
 }

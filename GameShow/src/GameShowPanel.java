@@ -74,8 +74,8 @@ class GameShowPanel {
             grid.getRowConstraints().clear();
             mediaPlayer.stop();
             GuessWord.display(grid);
-            game1.setId("selectedButton");
-            game1.setDisable(true);
+            game2.setId("selectedButton");
+            game2.setDisable(true);
         });
     }
 

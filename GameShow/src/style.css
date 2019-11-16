@@ -9,6 +9,12 @@
     -fx-background-size: 80% 60%;
 }
 */
+
+#guessWord{
+        -fx-font-weight: bold;
+        -fx-font-size: 35px;
+}
+
 #panelButtons {
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
@@ -22,6 +28,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 50px;
 }
+
 #panelButtons:hover {
     -fx-background-color:
         linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
