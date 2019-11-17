@@ -60,6 +60,7 @@ public class StartScreen {
             grid.getColumnConstraints().clear();
             grid.getRowConstraints().clear();
             grid.setId("null");
+            mediaPlayer.stop();
             GameShowPanel.display(grid);
         });
         primaryStage.setScene(scene);

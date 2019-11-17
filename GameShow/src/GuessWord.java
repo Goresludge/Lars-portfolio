@@ -13,7 +13,7 @@ import java.io.File;
 
 public class GuessWord {
 
-    private static String testString = "Vi testar";
+    private static String testString = "Hej cutie pie";
     private static boolean gameEnabled = true;
     private static int wrongGuess = 0;
 
@@ -21,7 +21,7 @@ public class GuessWord {
 
         grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
-                if (gameEnabled) {
+                if (gameEnabled && !key.getCode().toString().equals("UNDEFINED")) {
                     wordGame(grid, key.getCode());
                 }
 
@@ -77,7 +77,6 @@ public class GuessWord {
         GridPane.setFillWidth(lagB, true);
 
         grid.getChildren().addAll(lagA, lagB);
-        grid.setGridLinesVisible(true);
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(15);
         ColumnConstraints col2 = new ColumnConstraints();
@@ -166,6 +165,10 @@ public class GuessWord {
         }
         if(!exists){
             Button b = new Button(c);
+            b.setId("guessWord");
+            GridPane.setFillWidth(b, true);
+            GridPane.setFillHeight(b, true);
+            b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             grid.add(b, 1 + wrongGuess, 7);
             wrongGuess++;
         }
