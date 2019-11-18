@@ -1,6 +1,8 @@
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -10,25 +12,73 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class GuessWord {
 
-    private static String testString = "Hej cutie pie";
+    private static String currentWord ="";
+    private static String currentBonus ="";
+    private static int currentGame = 1;
     private static boolean gameEnabled = true;
     private static int wrongGuess = 0;
+    private static String pickedLetter = "" ;
+    private static ArrayList<String> hints = new ArrayList<String>();
+    private static ArrayList<String> words = new ArrayList<String>();
+    private static ArrayList<String> bonusLetters = new ArrayList<String>();
+    private static int lag1points = 0;
+    private static int lag2points = 0;
+
+    private static void gameAttributes(){
+
+        String hint1 = "Film";
+        String word1 = "James Bond Tomorrow Never Dies";
+        String bonusLetter1 = "i";
+        String hint2 = "TV-serie";
+        String word2 = "Morden i midsomer";
+        String bonusLetter2 = "s";
+        String hint3 = "Bok";
+        String word3 = "To Kill a Mockingbird";
+        String bonusLetter3 = "c";
+
+        hints.add(hint1);
+        hints.add(hint2);
+        hints.add(hint3);
+        words.add(word1);
+        words.add(word2);
+        words.add(word3);
+        bonusLetters.add(bonusLetter1);
+        bonusLetters.add(bonusLetter2);
+        bonusLetters.add(bonusLetter3);
+
+
+    }
+
+    private static void nextGame(GridPane grid){
+
+        wrongGuess = 0;
+        pickedLetter = "";
+        Label currentHint = new Label(hints.get(currentGame-1));
+        currentHint.setId("guessWordCategory");
+        GridPane.setHalignment(currentHint,HPos.CENTER);
+        GridPane.setValignment(currentHint,VPos.CENTER);
+        currentHint.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+        grid.add(currentHint,7,0,8,1);
+        currentBonus = bonusLetters.get(currentGame-1);
+        currentWord = words.get(currentGame-1);
+        setupGame(grid);
+
+    }
 
     public static void display(GridPane grid) {
 
         grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
-                if (gameEnabled && !key.getCode().toString().equals("UNDEFINED")) {
+                if (gameEnabled && validGuess(key)) {
                     wordGame(grid, key.getCode());
                 }
 
             }
         });
-
-        setupGame(grid);
 
         Button lagA;
         Button lagB;
@@ -42,41 +92,53 @@ public class GuessWord {
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 
-        setupScreen(grid, lagA, lagB);
+        setupScreen(grid);
+        setupTeamButtons(grid,lagA,lagB);
         lagA.setOnAction(e -> {
             grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            mediaPlayer.stop();
-            grid.setBackground(null);
-            gameEnabled = false;
-            GameShowPanel.result(grid, 3, 0);
+            if(currentGame == words.size()){
+                grid.getColumnConstraints().clear();
+                grid.getRowConstraints().clear();
+                mediaPlayer.stop();
+                grid.setBackground(null);
+                gameEnabled = false;
+                lag1points++;
+                GameShowPanel.result(grid, lag1points, lag2points);
+            }
+            else {
+                lag1points++;
+                currentGame++;
+                currentWord = "";
+                setupTeamButtons(grid,lagA,lagB);
+                nextGame(grid);
+            }
+
         });
         lagB.setOnAction(e -> {
             grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            mediaPlayer.stop();
-            grid.setBackground(null);
-            gameEnabled = false;
-            GameShowPanel.result(grid, 0, 3);
+            if(currentGame == words.size()){
+                grid.getColumnConstraints().clear();
+                grid.getRowConstraints().clear();
+                mediaPlayer.stop();
+                grid.setBackground(null);
+                gameEnabled = false;
+                lag2points++;
+                GameShowPanel.result(grid, lag1points, lag2points);
+            }
+            else {
+                lag2points++;
+                currentGame++;
+                setupTeamButtons(grid,lagA,lagB);
+                nextGame(grid);
+            }
         });
+
+        gameAttributes();
+        nextGame(grid);
     }
 
-    private static void setupScreen(GridPane grid, Button lagA, Button lagB) {
+    private static void setupScreen(GridPane grid) {
 
-        GridPane.setConstraints(lagA, 0, 7);
-        GridPane.setConstraints(lagB, 15, 7);
-        GridPane.setHalignment(lagA, HPos.CENTER);
-        GridPane.setHalignment(lagB, HPos.CENTER);
-
-        lagA.setId("teamButtons");
-        lagB.setId("teamButtons");
-
-        GridPane.setFillWidth(lagA, true);
-        GridPane.setFillWidth(lagB, true);
-
-        grid.getChildren().addAll(lagA, lagB);
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(15);
         ColumnConstraints col2 = new ColumnConstraints();
@@ -130,39 +192,116 @@ public class GuessWord {
 
     }
 
+    private static void setupTeamButtons(GridPane grid, Button lagA, Button lagB){
+        GridPane.setConstraints(lagA, 0, 7);
+        GridPane.setConstraints(lagB, 15, 7);
+        GridPane.setHalignment(lagA, HPos.CENTER);
+        GridPane.setHalignment(lagB, HPos.CENTER);
+
+        lagA.setId("teamButtons");
+        lagB.setId("teamButtons");
+
+        GridPane.setFillWidth(lagA, true);
+        GridPane.setFillWidth(lagB, true);
+
+        grid.getChildren().addAll(lagA, lagB);
+    }
+
     private static void setupGame(GridPane grid) {
-        for (int i = 0; i < testString.length(); i++) {
-            if (Character.isLetter(testString.charAt(i))) {
+        String [] words = currentWord.split(" ");
+        String stringRow = "";
+        int rows = 2;
+        for (String word:words) {
+            if((stringRow.length()+word.length()) > 14){
+                for (int i = 0; i < stringRow.length(); i++) {
+                    if (Character.isLetter(stringRow.charAt(i))) {
+                        Button b = new Button("");
+                        b.setId("guessWord");
+                        GridPane.setFillWidth(b, true);
+                        GridPane.setFillHeight(b, true);
+                        b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                        grid.add(b, i + 1, rows);
+                    }
+                }
+                stringRow = "";
+                stringRow = stringRow + word + " ";
+                rows++;
+            }
+            else{
+                stringRow = stringRow + word + " ";
+            }
+        }
+        for (int i = 0; i < stringRow.length(); i++) {
+            if (Character.isLetter(stringRow.charAt(i))) {
                 Button b = new Button("");
                 b.setId("guessWord");
                 GridPane.setFillWidth(b, true);
                 GridPane.setFillHeight(b, true);
                 b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(b, i + 1, 1);
+                grid.add(b, i + 1, rows);
             }
         }
+
     }
 
     private static void wordGame(GridPane grid, KeyCode letter) {
         String c = letter.toString();
         boolean exists = false;
 
-        for (int i = 0; i < testString.length(); i++) {
-            if (Character.isLetter(testString.charAt(i))) {
-                String s = String.valueOf(testString.charAt(i));
+        String [] words = currentWord.split(" ");
+        String stringRow = "";
+        int rows = 2;
+        for (String word:words) {
+            if((stringRow.length()+word.length()) > 14){
+                for (int i = 0; i < stringRow.length(); i++) {
+                    if (Character.isLetter(stringRow.charAt(i))) {
+                        String s = String.valueOf(stringRow.charAt(i));
+                        if(s.equals(c) || s.equals(c.toLowerCase())){
+                            Button b = new Button(s);
+                            if(currentBonus.equals(s)){
+                                b.setId("guessWordBonus");
+                            }
+                            else {
+                                b.setId("guessWord");
+                            }
+                            GridPane.setFillWidth(b, true);
+                            GridPane.setFillHeight(b, true);
+                            b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                            grid.add(b, i + 1, rows);
+                            exists = true;
+                        }
+
+                    }
+                }
+                stringRow = "";
+                stringRow = stringRow + word + " ";
+                rows++;
+            }
+            else{
+                stringRow = stringRow + word + " ";
+            }
+        }
+        for (int i = 0; i < stringRow.length(); i++) {
+            if (Character.isLetter(stringRow.charAt(i))) {
+                String s = String.valueOf(stringRow.charAt(i));
                 if(s.equals(c) || s.equals(c.toLowerCase())){
                     Button b = new Button(s);
-                    b.setId("guessWord");
+                    if(currentBonus.equals(s)){
+                        b.setId("guessWordBonus");
+                    }
+                    else {
+                        b.setId("guessWord");
+                    }
                     GridPane.setFillWidth(b, true);
                     GridPane.setFillHeight(b, true);
                     b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                    grid.add(b, i + 1, 1);
+                    grid.add(b, i + 1, rows);
                     exists = true;
                 }
 
             }
-
         }
+
         if(!exists){
             Button b = new Button(c);
             b.setId("guessWord");
@@ -171,6 +310,18 @@ public class GuessWord {
             b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             grid.add(b, 1 + wrongGuess, 7);
             wrongGuess++;
+        }
+    }
+
+    private static boolean validGuess(KeyEvent key){
+
+        if(pickedLetter.contains(key.getCode().toString()) || key.getCode().toString().equals("UNDEFINED")){
+            return false;
+        }
+        else{
+            pickedLetter = pickedLetter+key.getCode().toString();
+            System.out.println(pickedLetter);
+            return true;
         }
     }
 }
