@@ -1,3 +1,5 @@
+import javafx.animation.ScaleTransition;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -10,6 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,6 +32,135 @@ public class GuessWord {
     private static ArrayList<String> bonusLetters = new ArrayList<String>();
     private static int lag1points = 0;
     private static int lag2points = 0;
+    private static ScaleTransition scaleTransition = new ScaleTransition();
+
+
+    public static void display(GridPane grid) {
+
+        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent key) {
+                if (gameEnabled && validGuess(key)) {
+                    wordGame(grid, key.getCode());
+                }
+
+            }
+        });
+
+        Button lagA;
+        Button lagB;
+        lagA = new Button(StartScreen.getLagnamn1());
+        lagB = new Button(StartScreen.getLagnamn2());
+
+        grid.setId("GuessWord");
+
+        String musicFile = "GuessWord.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+
+        setupScreen(grid);
+        setupTeamButtons(grid,lagA,lagB);
+        lagA.setOnAction(e -> {
+            if(currentGame == words.size()){
+                screenTransitionFrom(grid);
+                scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        grid.getChildren().clear();
+                        grid.getColumnConstraints().clear();
+                        grid.getRowConstraints().clear();
+                        mediaPlayer.stop();
+                        grid.setBackground(null);
+                        gameEnabled = false;
+                        lag1points++;
+                        GameShowPanel.result(grid, lag1points, lag2points);
+                    }
+                });
+
+            }
+            else {
+                grid.getChildren().clear();
+                lag1points++;
+                currentGame++;
+                currentWord = "";
+                setupTeamButtons(grid,lagA,lagB);
+                nextGame(grid);
+            }
+
+        });
+        lagB.setOnAction(e -> {
+
+            if(currentGame == words.size()){
+                screenTransitionFrom(grid);
+                scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        grid.getChildren().clear();
+                        grid.getColumnConstraints().clear();
+                        grid.getRowConstraints().clear();
+                        mediaPlayer.stop();
+                        grid.setBackground(null);
+                        gameEnabled = false;
+                        lag2points++;
+                        GameShowPanel.result(grid, lag1points, lag2points);
+                    }
+                });
+            }
+            else {
+                grid.getChildren().clear();
+                lag2points++;
+                currentGame++;
+                setupTeamButtons(grid,lagA,lagB);
+                nextGame(grid);
+            }
+        });
+
+        gameAttributes();
+        nextGame(grid);
+        screenTransitionTo(grid);
+    }
+
+    private static void screenTransitionTo(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(50);
+        circle.setCenterY(50);
+        circle.setRadius(1400);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,7,3);
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(-1.0);
+        scaleTransition.setByY(-1.0);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().remove(circle);
+            }
+        });
+    }
+
+    private static void screenTransitionFrom(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(1);
+        circle.setCenterY(1);
+        circle.setRadius(1);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,7,3);
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(1400);
+        scaleTransition.setByY(1400);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
+    }
 
     private static void gameAttributes(){
 
@@ -69,73 +203,6 @@ public class GuessWord {
 
     }
 
-    public static void display(GridPane grid) {
-
-        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent key) {
-                if (gameEnabled && validGuess(key)) {
-                    wordGame(grid, key.getCode());
-                }
-
-            }
-        });
-
-        Button lagA;
-        Button lagB;
-        lagA = new Button(StartScreen.getLagnamn1());
-        lagB = new Button(StartScreen.getLagnamn2());
-
-        grid.setId("GuessWord");
-
-        String musicFile = "GuessWord.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
-
-        setupScreen(grid);
-        setupTeamButtons(grid,lagA,lagB);
-        lagA.setOnAction(e -> {
-            grid.getChildren().clear();
-            if(currentGame == words.size()){
-                grid.getColumnConstraints().clear();
-                grid.getRowConstraints().clear();
-                mediaPlayer.stop();
-                grid.setBackground(null);
-                gameEnabled = false;
-                lag1points++;
-                GameShowPanel.result(grid, lag1points, lag2points);
-            }
-            else {
-                lag1points++;
-                currentGame++;
-                currentWord = "";
-                setupTeamButtons(grid,lagA,lagB);
-                nextGame(grid);
-            }
-
-        });
-        lagB.setOnAction(e -> {
-            grid.getChildren().clear();
-            if(currentGame == words.size()){
-                grid.getColumnConstraints().clear();
-                grid.getRowConstraints().clear();
-                mediaPlayer.stop();
-                grid.setBackground(null);
-                gameEnabled = false;
-                lag2points++;
-                GameShowPanel.result(grid, lag1points, lag2points);
-            }
-            else {
-                lag2points++;
-                currentGame++;
-                setupTeamButtons(grid,lagA,lagB);
-                nextGame(grid);
-            }
-        });
-
-        gameAttributes();
-        nextGame(grid);
-    }
 
     private static void setupScreen(GridPane grid) {
 

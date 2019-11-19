@@ -13,6 +13,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.File;
 
 public class StartScreen {
@@ -67,6 +68,16 @@ public class StartScreen {
         primaryStage.show();
         primaryStage.setFullScreen(true);
 
+    }
+
+    static double getScreenHeight(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        return screenSize.getHeight();
+    }
+
+    static double getScreenWidth(){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        return screenSize.getWidth();
     }
 
     static String getLagnamn1(){

@@ -1,16 +1,18 @@
-import com.sun.deploy.util.ArrayUtil;
+import javafx.animation.ScaleTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.transform.Scale;
 import javafx.util.Duration;
-
 import java.io.File;
 
 class GameShowPanel {
@@ -47,6 +49,7 @@ class GameShowPanel {
     private static int pointsLag2;
     private static Label lagnamn1 = new Label(StartScreen.getLagnamn1());
     private static Label lagnamn2 = new Label(StartScreen.getLagnamn2());
+    private static ScaleTransition scaleTransition = new ScaleTransition();
 
     static void display(GridPane grid){
 
@@ -58,35 +61,112 @@ class GameShowPanel {
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
 
+
+
         game1.setOnAction(e-> {
-            grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            mediaPlayer.stop();
-            StreetFighterDuel.display(grid);
-            game1.setId("selectedButton");
-            game1.setDisable(true);
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    StreetFighterDuel.display(grid);
+                    game1.setId("selectedButton");
+                    game1.setDisable(true);
+                }
+            });
+
         });
 
         game2.setOnAction(e-> {
-            grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            mediaPlayer.stop();
-            GuessWord.display(grid);
-            game2.setId("selectedButton");
-            game2.setDisable(true);
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    GuessWord.display(grid);
+                    game2.setId("selectedButton");
+                    game2.setDisable(true);
+                }
+            });
+        });
+
+        game3.setOnAction(e-> {
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    LongestWord.display(grid);
+                    game3.setId("selectedButton");
+                    game3.setDisable(true);
+                }
+            });
         });
     }
 
-    static void result(GridPane grid, int a, int b){
+
+    static void result(GridPane grid, int a, int b) {
 
         pointsLag1 += a;
         pointsLag2 += b;
         labelPointLag1.setText("Poäng: " + Integer.toString(pointsLag1));
         labelPointLag2.setText("Poäng: " + Integer.toString(pointsLag2));
-
         display(grid);
+        screenTransitionTo(grid);
+    }
+
+    private static void screenTransitionFrom(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(1);
+        circle.setCenterY(1);
+        circle.setRadius(1);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,3,2);
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(1400);
+        scaleTransition.setByY(1400);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
+
+    }
+
+    private static void screenTransitionTo(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(50);
+        circle.setCenterY(50);
+        circle.setRadius(1400);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,3,2);
+        ScaleTransition scaleTransition = new ScaleTransition();
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(-1.0);
+        scaleTransition.setByY(-1.0);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().remove(circle);
+            }
+        });
+
     }
 
     private static void setupPanel(GridPane grid){

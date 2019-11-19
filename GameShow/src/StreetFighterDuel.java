@@ -1,23 +1,29 @@
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
 import java.io.File;
 
 import java.io.File;
 
 public class StreetFighterDuel {
 
-
+    private static ScaleTransition scaleTransition = new ScaleTransition();
 
     public static void display(GridPane grid){
 
@@ -35,21 +41,80 @@ public class StreetFighterDuel {
 
         setupScreen(grid,lagA,lagB);
         lagA.setOnAction(e -> {
-            grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            mediaPlayer.stop();
-            grid.setBackground(null);
-            GameShowPanel.result(grid,3,0);
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    grid.setBackground(null);
+                    GameShowPanel.result(grid,3,0);
+                }
+            });
         });
         lagB.setOnAction(e -> {
-            grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            mediaPlayer.stop();
-            grid.setBackground(null);
-            GameShowPanel.result(grid,0,3);
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    grid.setBackground(null);
+                    GameShowPanel.result(grid,0,3);
+                }
+            });
+
         });
+        screenTransitionTo(grid);
+    }
+
+    private static void screenTransitionTo(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(50);
+        circle.setCenterY(50);
+        circle.setRadius(1400);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,3,2);
+
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(-1.0);
+        scaleTransition.setByY(-1.0);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().remove(circle);
+            }
+        });
+
+    }
+
+    private static void screenTransitionFrom(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(1);
+        circle.setCenterY(1);
+        circle.setRadius(1);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,3,2);
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(1400);
+        scaleTransition.setByY(1400);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
+
     }
 
     private static void setupScreen(GridPane grid,Button lagA,Button lagB){
