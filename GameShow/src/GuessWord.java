@@ -387,7 +387,6 @@ public class GuessWord {
         }
         else{
             pickedLetter = pickedLetter+key.getCode().toString();
-            System.out.println(pickedLetter);
             return true;
         }
     }

@@ -1,12 +1,9 @@
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
-import javafx.geometry.HPos;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -15,6 +12,7 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.File;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class StartScreen {
 
@@ -25,12 +23,11 @@ public class StartScreen {
     public static void display(Stage primaryStage) {
 
 
-
+        AtomicReference<Boolean> enabled = new AtomicReference<>(true);
         primaryStage.setTitle("GAME SHOW!!");
 
         GridPane grid = new GridPane();
         Scene scene = new Scene(grid,700,500);
-
 
         scene.getStylesheets().add("style.css");
 
@@ -52,11 +49,13 @@ public class StartScreen {
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
+        mediaPlayer.setVolume(0.7);
 
         buttonPlay.setId("startButton");
         grid.setId("startScreen");
 
         buttonPlay.setOnAction(e -> {
+            enabled.set(false);
             grid.getChildren().clear();
             grid.getColumnConstraints().clear();
             grid.getRowConstraints().clear();
@@ -67,6 +66,21 @@ public class StartScreen {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setFullScreen(true);
+
+        grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent key) {
+                if(enabled.get()){
+                    String sfx = key.getCode().toString();
+                    if(sfx.equals("A")){
+                        String musicFile = "Applause1.mp3";
+                        Media sound = new Media(new File(musicFile).toURI().toString());
+                        MediaPlayer mediaPlayerSFX = new MediaPlayer(sound);
+                        mediaPlayerSFX.play();
+                    }
+                }
+
+            }
+        });
 
     }
 

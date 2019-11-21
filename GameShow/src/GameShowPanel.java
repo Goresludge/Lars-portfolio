@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -60,6 +62,7 @@ class GameShowPanel {
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
+        mediaPlayer.setVolume(0.6);
 
 
 
@@ -111,6 +114,22 @@ class GameShowPanel {
                 }
             });
         });
+
+        game4.setOnAction(e-> {
+            bonusTransition(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    BonusSpin.display(grid);
+                    game4.setId("selectedButton");
+                    game4.setDisable(true);
+                }
+            });
+        });
     }
 
 
@@ -122,6 +141,28 @@ class GameShowPanel {
         labelPointLag2.setText("Poäng: " + Integer.toString(pointsLag2));
         display(grid);
         screenTransitionTo(grid);
+    }
+
+    private static void bonusTransition(GridPane grid){
+        ImageView image = new ImageView("bonus.png");
+        GridPane.setHalignment(image,HPos.CENTER);
+        GridPane.setValignment(image,VPos.CENTER);
+        grid.add(image,3,2);
+        ScaleTransition bonusTransition = new ScaleTransition();
+        bonusTransition.setDuration(Duration.millis(500));
+        bonusTransition.setByX(1.5);
+        bonusTransition.setByY(1.5);
+        bonusTransition.setCycleCount(10);
+        bonusTransition.setNode(image);
+        bonusTransition.setAutoReverse(true);
+        bonusTransition.play();
+        bonusTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                screenTransitionFrom(grid);
+            }
+        });
+
     }
 
     private static void screenTransitionFrom(GridPane grid){
