@@ -52,10 +52,15 @@ class GameShowPanel {
     private static Label lagnamn1 = new Label(StartScreen.getLagnamn1());
     private static Label lagnamn2 = new Label(StartScreen.getLagnamn2());
     private static ScaleTransition scaleTransition = new ScaleTransition();
+    private static boolean firstTransitionDone = false;
 
     static void display(GridPane grid){
 
         setupPanel(grid);
+
+        if(!firstTransitionDone){
+            firstTransition(grid);
+        }
 
         String musicFile = "StartMusic.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
@@ -143,6 +148,29 @@ class GameShowPanel {
         screenTransitionTo(grid);
     }
 
+    private static void firstTransition(GridPane grid){
+        ImageView image = new ImageView("star.png");
+        image.setFitHeight(StartScreen.getScreenHeight()*4);
+        image.setFitWidth(StartScreen.getScreenWidth()*4);
+        GridPane.setHalignment(image,HPos.CENTER);
+        GridPane.setValignment(image,VPos.CENTER);
+        grid.add(image,3,2);
+        scaleTransition.setDuration(Duration.millis(2000));
+        scaleTransition.setByX(-1.0);
+        scaleTransition.setByY(-1.0);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(image);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                firstTransitionDone = true;
+                grid.getChildren().remove(image);
+            }
+        });
+    }
+
     private static void bonusTransition(GridPane grid){
         ImageView image = new ImageView("bonus.png");
         GridPane.setHalignment(image,HPos.CENTER);
@@ -181,7 +209,6 @@ class GameShowPanel {
         scaleTransition.setNode(circle);
         scaleTransition.setAutoReverse(true);
         scaleTransition.play();
-
     }
 
     private static void screenTransitionTo(GridPane grid){

@@ -1,12 +1,19 @@
+import javafx.animation.ScaleTransition;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -19,6 +26,7 @@ public class StartScreen {
     private static TextField lagnamn1Input1 = new TextField("Lagnamn");
     private static TextField lagnamn1Input2 = new TextField("Lagnamn");
     private static Button buttonPlay = new Button("KÖR IGÅNG SPELET");
+    private static ScaleTransition scaleTransition = new ScaleTransition();
 
     public static void display(Stage primaryStage) {
 
@@ -55,13 +63,19 @@ public class StartScreen {
         grid.setId("startScreen");
 
         buttonPlay.setOnAction(e -> {
-            enabled.set(false);
-            grid.getChildren().clear();
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
-            grid.setId("null");
-            mediaPlayer.stop();
-            GameShowPanel.display(grid);
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    enabled.set(false);
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    grid.setId("null");
+                    mediaPlayer.stop();
+                    GameShowPanel.display(grid);
+                }
+            });
         });
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -82,6 +96,23 @@ public class StartScreen {
             }
         });
 
+    }
+
+
+    private static void screenTransitionFrom(GridPane grid){
+        ImageView image = new ImageView("star.png");
+        image.setFitWidth(1);
+        image.setFitHeight(1);
+        GridPane.setHalignment(image, HPos.CENTER);
+        GridPane.setValignment(image, VPos.CENTER);
+        grid.add(image,1,1);
+        scaleTransition.setDuration(Duration.millis(2000));
+        scaleTransition.setByX(4000);
+        scaleTransition.setByY(4000);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(image);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
     }
 
     static double getScreenHeight(){
