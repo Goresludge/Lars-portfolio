@@ -24,7 +24,7 @@ import java.io.File;
 
 public class jeopardy {
 
-    private static Button category1 = new Button("IKEA");
+    private static Button category1 = new Button("IKEA-KÄNDISAR");
     private static Button category2 = new Button("ÅRTAL");
     private static Button category3 = new Button("3");
     private static Button question1 = new Button("1");
@@ -42,7 +42,6 @@ public class jeopardy {
     private static Label lagnamn1 = new Label(StartScreen.getLagnamn1());
     private static Label lagnamn2 = new Label(StartScreen.getLagnamn2());
     private static ScaleTransition scaleTransition = new ScaleTransition();
-    private static boolean gameEnabled = true;
     private static Button displayButton = new Button();
 
     static void display(GridPane grid){
@@ -71,26 +70,23 @@ public class jeopardy {
         });
 
         question1.setOnAction(e-> {
-            String question = "Hur många ben har en spindel?";
+            String question = "Ikeas främsta bokförvarare\n som även har en namne\n i en pan-pizza";
             addDisabledButton(question1);
             displayQuestion(grid,question,displayButton);
         });
 
         question2.setOnAction(e-> {
-            String question = "Hur många ben har jag?";
+            String question = "En möbelserie som många\n inklusive Lasse Berghagen\n har i sitt hjärta";
             addDisabledButton(question2);
             displayQuestion(grid,question,displayButton);
         });
-/*
-        question3.setOnAction(e-> {
-            buttonTransition(grid);
-            buttonTransition.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                }
-            });
-        });
 
+        question3.setOnAction(e-> {
+            String question = "Den mest sålda soffan\n som man kan luta sig\n mot när man har det svårt";
+            addDisabledButton(question3);
+            displayQuestion(grid,question,displayButton);
+        });
+/*
         question4.setOnAction(e-> {
             buttonTransition(grid);
             buttonTransition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -101,6 +97,10 @@ public class jeopardy {
 
         });
         */
+    }
+
+    private static void runIntro(){
+
     }
 
     private static void addDisabledButton(Button button){
