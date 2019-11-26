@@ -10,6 +10,37 @@
 }
 */
 
+#disableJeopardyPanel{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+        linear-gradient(from 0% 93% to 0% 100%, #6967a2 0%, #493e8f 100%),
+        #32249d,
+        #4c3ad8,
+        radial-gradient(center 50% 50%, radius 100%, #543ad8, #3b2cc5);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+
+#jeopardyPanel{
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 8;
+    -fx-background-color:
+        linear-gradient(from 0% 93% to 0% 100%, #1813a3 0%, #231290 100%),
+        #32249d,
+        #4c3ad8,
+        radial-gradient(center 50% 50%, radius 100%, #543ad8, #3b2cc5);
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-text-fill: white;
+    -fx-padding: 10 20 10 20;
+        }
+
 #guessWord{
         -fx-font-weight: bold;
         -fx-font-size: 35px;

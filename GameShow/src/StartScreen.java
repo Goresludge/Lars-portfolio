@@ -1,4 +1,7 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -64,6 +67,10 @@ public class StartScreen {
 
         buttonPlay.setOnAction(e -> {
             screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
             scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -106,9 +113,9 @@ public class StartScreen {
         GridPane.setHalignment(image, HPos.CENTER);
         GridPane.setValignment(image, VPos.CENTER);
         grid.add(image,1,1);
-        scaleTransition.setDuration(Duration.millis(2000));
-        scaleTransition.setByX(4000);
-        scaleTransition.setByY(4000);
+        scaleTransition.setDuration(Duration.millis(1500));
+        scaleTransition.setByX(getScreenWidth()*8);
+        scaleTransition.setByY(getScreenHeight()*12);
         scaleTransition.setCycleCount(1);
         scaleTransition.setNode(image);
         scaleTransition.setAutoReverse(true);

@@ -70,7 +70,6 @@ public class GuessWord {
                         grid.getColumnConstraints().clear();
                         grid.getRowConstraints().clear();
                         mediaPlayer.stop();
-                        grid.setBackground(null);
                         gameEnabled = false;
                         lag1points++;
                         GameShowPanel.result(grid, lag1points, lag2points);
@@ -99,7 +98,6 @@ public class GuessWord {
                         grid.getColumnConstraints().clear();
                         grid.getRowConstraints().clear();
                         mediaPlayer.stop();
-                        grid.setBackground(null);
                         gameEnabled = false;
                         lag2points++;
                         GameShowPanel.result(grid, lag1points, lag2points);

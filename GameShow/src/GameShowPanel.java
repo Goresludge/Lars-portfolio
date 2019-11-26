@@ -1,4 +1,7 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -6,14 +9,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import java.io.File;
 
@@ -71,8 +72,14 @@ class GameShowPanel {
 
 
 
+
+
         game1.setOnAction(e-> {
             screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
             scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -90,6 +97,10 @@ class GameShowPanel {
 
         game2.setOnAction(e-> {
             screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
             scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -106,6 +117,10 @@ class GameShowPanel {
 
         game3.setOnAction(e-> {
             screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
             scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -122,6 +137,10 @@ class GameShowPanel {
 
         game4.setOnAction(e-> {
             bonusTransition(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
             scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -134,6 +153,28 @@ class GameShowPanel {
                     game4.setDisable(true);
                 }
             });
+
+        });
+
+        game5.setOnAction(e-> {
+            screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    jeopardy.display(grid);
+                    game4.setId("selectedButton");
+                    game4.setDisable(true);
+                }
+            });
+
         });
     }
 
@@ -150,12 +191,12 @@ class GameShowPanel {
 
     private static void firstTransition(GridPane grid){
         ImageView image = new ImageView("star.png");
-        image.setFitHeight(StartScreen.getScreenHeight()*4);
-        image.setFitWidth(StartScreen.getScreenWidth()*4);
+        image.setFitHeight(StartScreen.getScreenHeight()*12);
+        image.setFitWidth(StartScreen.getScreenWidth()*8);
         GridPane.setHalignment(image,HPos.CENTER);
         GridPane.setValignment(image,VPos.CENTER);
         grid.add(image,3,2);
-        scaleTransition.setDuration(Duration.millis(2000));
+        scaleTransition.setDuration(Duration.millis(1500));
         scaleTransition.setByX(-1.0);
         scaleTransition.setByY(-1.0);
         scaleTransition.setCycleCount(1);

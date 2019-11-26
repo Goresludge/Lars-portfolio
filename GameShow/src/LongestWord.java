@@ -54,7 +54,6 @@ public class LongestWord {
                         grid.getColumnConstraints().clear();
                         grid.getRowConstraints().clear();
                         mediaPlayer.stop();
-                        grid.setBackground(null);
                         lag1points++;
                         lag2points++;
                         GameShowPanel.result(grid, lag1points, lag2points);
@@ -83,7 +82,6 @@ public class LongestWord {
                         grid.getColumnConstraints().clear();
                         grid.getRowConstraints().clear();
                         mediaPlayer.stop();
-                        grid.setBackground(null);
                         lag1points++;
                         GameShowPanel.result(grid, lag1points, lag2points);
                     }
@@ -110,7 +108,6 @@ public class LongestWord {
                         grid.getColumnConstraints().clear();
                         grid.getRowConstraints().clear();
                         mediaPlayer.stop();
-                        grid.setBackground(null);
                         lag2points++;
                         GameShowPanel.result(grid, lag1points, lag2points);
                     }
@@ -233,7 +230,7 @@ public class LongestWord {
         circle.setRadius(1400);
         GridPane.setHalignment(circle,HPos.CENTER);
         GridPane.setValignment(circle,VPos.CENTER);
-        grid.add(circle,7,3);
+        grid.add(circle,5,3);
         scaleTransition.setDuration(Duration.millis(1000));
         scaleTransition.setByX(-1.0);
         scaleTransition.setByY(-1.0);
@@ -257,7 +254,7 @@ public class LongestWord {
         circle.setRadius(1);
         GridPane.setHalignment(circle,HPos.CENTER);
         GridPane.setValignment(circle,VPos.CENTER);
-        grid.add(circle,7,3);
+        grid.add(circle,5,3);
         scaleTransition.setDuration(Duration.millis(1000));
         scaleTransition.setByX(1400);
         scaleTransition.setByY(1400);
