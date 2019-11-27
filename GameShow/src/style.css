@@ -1,6 +1,24 @@
 .root{
     -fx-background-color: #70add6;
 }
+
+#jeopardyBG{
+    -fx-background-color: #121871;
+}
+
+#jeopardyLabels{
+    -fx-font: normal bold 40px 'Chalkduster';
+    -fx-text-fill: white;
+}
+
+#jeopardyButtons{
+    -fx-padding: 8 15 15 15;
+    -fx-background-color: #121871;
+    -fx-font-weight: bold;
+    -fx-font-size: 40px;
+    -fx-text-fill: white;
+    -fx-font-family: 'Chalkduster';
+}
 /*
 #startScreen{
     -fx-background-image: url("logo.png");
@@ -10,7 +28,7 @@
 }
 */
 
-#disableJeopardyPanel{
+#displayJeopardyPanel{
     -fx-padding: 8 15 15 15;
     -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
     -fx-background-radius: 8;
@@ -36,7 +54,7 @@
         radial-gradient(center 50% 50%, radius 100%, #543ad8, #3b2cc5);
     -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
     -fx-font-weight: bold;
-    -fx-font-size: 30px;
+    -fx-font-size: 40px;
     -fx-text-fill: white;
     -fx-padding: 10 20 10 20;
         }
@@ -182,6 +200,6 @@
 }
 
 #StreetFighter{
-   -fx-background-image: url('StreetFighter.jpg');
+   -fx-background-image: url('img/StreetFighter.jpg');
    -fx-background-size: stretch;
 }

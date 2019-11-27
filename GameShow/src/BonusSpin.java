@@ -20,7 +20,7 @@ public class BonusSpin {
 
     private static ScaleTransition scaleTransition = new ScaleTransition();
     private static RotateTransition rotateTransition = new RotateTransition();
-    private static ImageView bonusWheel = new ImageView("bonusWheel.png");
+    private static ImageView bonusWheel = new ImageView("img/bonusWheel.png");
     private static boolean gameEnabled = true;
 
     public static void display(GridPane grid){
@@ -80,7 +80,7 @@ public class BonusSpin {
         GridPane.setHalignment(bonusWheel,HPos.CENTER);
         GridPane.setValignment(bonusWheel,VPos.CENTER);
         grid.add(bonusWheel,1,2);
-        ImageView wheelPointer = new ImageView("wheelPointer.png");
+        ImageView wheelPointer = new ImageView("img/wheelPointer.png");
         wheelPointer.setFitWidth(StartScreen.getScreenHeight()/20);
         wheelPointer.setFitHeight(StartScreen.getScreenHeight()/15);
         GridPane.setValignment(wheelPointer,VPos.CENTER);

@@ -107,7 +107,7 @@ public class StartScreen {
 
 
     private static void screenTransitionFrom(GridPane grid){
-        ImageView image = new ImageView("star.png");
+        ImageView image = new ImageView("img/star.png");
         image.setFitWidth(1);
         image.setFitHeight(1);
         GridPane.setHalignment(image, HPos.CENTER);

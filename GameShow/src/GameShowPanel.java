@@ -190,7 +190,7 @@ class GameShowPanel {
     }
 
     private static void firstTransition(GridPane grid){
-        ImageView image = new ImageView("star.png");
+        ImageView image = new ImageView("img/star.png");
         image.setFitHeight(StartScreen.getScreenHeight()*12);
         image.setFitWidth(StartScreen.getScreenWidth()*8);
         GridPane.setHalignment(image,HPos.CENTER);
@@ -213,7 +213,7 @@ class GameShowPanel {
     }
 
     private static void bonusTransition(GridPane grid){
-        ImageView image = new ImageView("bonus.png");
+        ImageView image = new ImageView("img/bonus.png");
         GridPane.setHalignment(image,HPos.CENTER);
         GridPane.setValignment(image,VPos.CENTER);
         grid.add(image,3,2);
