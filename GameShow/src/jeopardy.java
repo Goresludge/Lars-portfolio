@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -47,6 +50,7 @@ public class jeopardy {
     private static Button lag1plus = new Button("+");
     private static Button lag2minus = new Button("-");
     private static Button lag2plus = new Button("+");
+    private static Button finishButton = new Button("Färdig");
     private static int pointsLag1 = 0;
     private static int pointsLag2 = 0;
     private static int countDone = 0;
@@ -55,16 +59,12 @@ public class jeopardy {
 
     static void display(GridPane grid){
 
+
+
         setupPanel(grid);
+        screenTransitionTo(grid);
         displayButton.setOpacity(0);
-        String musicFile = "Jeopardy.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(14),
-                        new KeyValue(mediaPlayer.volumeProperty(), 0)));
-        timeline.play();
+        runIntro(grid);
 
         lag1minus.setOnAction(e -> {
             pointsLag1--;
@@ -84,6 +84,20 @@ public class jeopardy {
         lag2plus.setOnAction(e -> {
             pointsLag2++;
             labelPointLag2.setText("Poäng: " + Integer.toString(pointsLag2));
+        });
+
+        finishButton.setOnAction(e -> {
+            screenTransitionFrom(grid);
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    returnResult(grid);
+                }
+            });
+
         });
 
         question1.setOnAction(e-> {
@@ -151,12 +165,53 @@ public class jeopardy {
 
     }
 
-    private static boolean finished(){
+    private static void returnResult(GridPane grid){
+        GameShowPanel.result(grid,pointsLag1,pointsLag2);
+    }
+
+    private static boolean finishedCounter(){
         return countDone == 9;
     }
 
-    private static void runIntro(){
-
+    private static void runIntro(GridPane grid){
+        Image image = new Image("img/JeopardyLogo.png");
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(StartScreen.getScreenWidth());
+        imageView.setFitHeight(StartScreen.getScreenHeight());
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        String musicFile = "JeopardyIntro.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(2),
+                        new KeyValue(mediaPlayer.volumeProperty(), 0)));
+        grid.add(imageView,0,2);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(3000),imageView);
+        translateTransition.setToY(StartScreen.getScreenHeight()*2);
+        translateTransition.setCycleCount(1);
+        translateTransition.play();
+        translateTransition.pause();
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(9));
+        pauseTransition.play();
+        pauseTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                timeline.play();
+                translateTransition.play();
+            }
+        });
+        translateTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().remove(imageView);
+                translateTransition.stop();
+                pauseTransition.stop();
+                mediaPlayer.dispose();
+            }
+        });
     }
 
     private static void addDisabledButton(Button button){
@@ -172,7 +227,6 @@ public class jeopardy {
         GridPane.setFillHeight(button,true);
         button.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
         button.setText("Konstnär");
-        button.setId("Målade det relativt\nkända konstverket\n'Mona Lisa'");
         grid.add(button,3,2);
         scaleTransition.setByX(2.5);
         scaleTransition.setByY(2.5);
@@ -182,6 +236,9 @@ public class jeopardy {
         scaleTransition.setAutoReverse(false);
         scaleTransition.play();
         button.setDisable(true);
+        String musicFile = "JeopardyFinalMusic.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
         scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -191,11 +248,16 @@ public class jeopardy {
         final int[] i = {0};
         button.setOnAction(e -> {
             if(i[0] == 0){
-                displayTimer(grid);
-                button.setText("En bra fråga");
+                button.setText("Målade det relativt\nkända konstverket\n'Mona Lisa'");
+                displayFinalTimer(grid);
+                mediaPlayer.play();
             }
             if(i[0] == 1){
                 hideQuestion(button,grid);
+                mediaPlayer.dispose();
+                GridPane.setHalignment(finishButton,HPos.CENTER);
+                finishButton.setId("jeopardyButtons");
+                grid.add(finishButton,3,4);
             }
             i[0]++;
         });
@@ -218,11 +280,36 @@ public class jeopardy {
                 grid.getChildren().remove(displayButton);
                 scaleTransition = new ScaleTransition();
                 button.setDisable(false);
-                if(finished()){
+                if(finishedCounter()){
                     lastQuestion(button,grid);
                 }
             }
         });
+    }
+
+    private static void displayFinalTimer(GridPane grid){
+        ImageView image = new ImageView("img/jeopardyTimer.png");
+        GridPane.setHalignment(image,HPos.CENTER);
+        GridPane.setValignment(image,VPos.CENTER);
+        grid.add(image,3,4);
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setInterpolator(Interpolator.LINEAR);
+        rotateTransition.setAxis(Rotate.Z_AXIS);
+        rotateTransition.setNode(image);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setDuration(Duration.seconds(30));
+        rotateTransition.setAutoReverse(false);
+        image.opacityProperty().setValue(1);
+        rotateTransition.play();
+        rotateTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                image.opacityProperty().setValue(0);
+            }
+        });
+
     }
 
     private static void displayTimer(GridPane grid){
@@ -237,7 +324,7 @@ public class jeopardy {
         rotateTransition.setNode(image);
         rotateTransition.setByAngle(360);
         rotateTransition.setCycleCount(1);
-        rotateTransition.setDuration(Duration.millis(8000));
+        rotateTransition.setDuration(Duration.seconds(9));
         rotateTransition.setAutoReverse(false);
         image.opacityProperty().setValue(1);
         rotateTransition.play();
@@ -251,6 +338,10 @@ public class jeopardy {
     }
 
     private static void displayQuestion(GridPane grid,String question,Button button){
+        String musicFile = "SwooshSFX.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
         button.setOpacity(1);
         GridPane.setFillWidth(button,true);
         GridPane.setFillHeight(button,true);
@@ -260,7 +351,7 @@ public class jeopardy {
         grid.add(button,3,2);
         scaleTransition.setByX(3);
         scaleTransition.setByY(3);
-        scaleTransition.setDuration(Duration.millis(1500));
+        scaleTransition.setDuration(Duration.millis(500));
         scaleTransition.setCycleCount(1);
         scaleTransition.setNode(button);
         scaleTransition.setAutoReverse(false);
@@ -270,6 +361,7 @@ public class jeopardy {
         scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                mediaPlayer.dispose();
                 button.setDisable(false);
             }
         });
@@ -375,7 +467,49 @@ public class jeopardy {
         grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
         grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
 
+    }
 
+    private static void screenTransitionFrom(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(1);
+        circle.setCenterY(1);
+        circle.setRadius(1);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,3,2);
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(1400);
+        scaleTransition.setByY(1400);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.play();
+    }
+
+    private static void screenTransitionTo(GridPane grid){
+        Circle circle = new Circle();
+        circle.setFill(Color.BLACK);
+        circle.setCenterX(50);
+        circle.setCenterY(50);
+        circle.setRadius(1400);
+        GridPane.setHalignment(circle,HPos.CENTER);
+        GridPane.setValignment(circle,VPos.CENTER);
+        grid.add(circle,3,2);
+        ScaleTransition scaleTransition = new ScaleTransition();
+        scaleTransition.setDuration(Duration.millis(1000));
+        scaleTransition.setByX(-1.0);
+        scaleTransition.setByY(-1.0);
+        scaleTransition.setCycleCount(1);
+        scaleTransition.setNode(circle);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
+        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().remove(circle);
+            }
+        });
 
     }
 }

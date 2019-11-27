@@ -170,8 +170,8 @@ class GameShowPanel {
                     grid.getRowConstraints().clear();
                     mediaPlayer.stop();
                     jeopardy.display(grid);
-                    game4.setId("selectedButton");
-                    game4.setDisable(true);
+                    game5.setId("selectedButton");
+                    game5.setDisable(true);
                 }
             });
 
