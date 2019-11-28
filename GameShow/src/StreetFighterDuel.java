@@ -34,7 +34,7 @@ public class StreetFighterDuel {
 
         grid.setId("StreetFighter");
 
-        String musicFile = "StreetFighter.mp3";
+        String musicFile = "src/mp3/StreetFighter.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();

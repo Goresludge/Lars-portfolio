@@ -181,7 +181,7 @@ public class jeopardy {
         imageView.setFitHeight(StartScreen.getScreenHeight());
         imageView.setSmooth(true);
         imageView.setCache(true);
-        String musicFile = "JeopardyIntro.mp3";
+        String musicFile = "src/mp3/JeopardyIntro.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
@@ -236,7 +236,7 @@ public class jeopardy {
         scaleTransition.setAutoReverse(false);
         scaleTransition.play();
         button.setDisable(true);
-        String musicFile = "JeopardyFinalMusic.mp3";
+        String musicFile = "src/mp3/JeopardyFinalMusic.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
@@ -338,7 +338,7 @@ public class jeopardy {
     }
 
     private static void displayQuestion(GridPane grid,String question,Button button){
-        String musicFile = "SwooshSFX.mp3";
+        String musicFile = "src/mp3/SwooshSFX.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();

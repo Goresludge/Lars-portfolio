@@ -37,7 +37,7 @@ public class LongestWord {
 
         grid.setId("GuessWord");
 
-        String musicFile = "GuessWord.mp3";
+        String musicFile = "src/mp3/GuessWord.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();

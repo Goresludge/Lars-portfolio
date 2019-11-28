@@ -33,7 +33,7 @@ public class BonusSpin {
 
         grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
-                if (key.getCode().toString().equalsIgnoreCase("s")) {
+                if (key.getCode().toString().equalsIgnoreCase("s") && gameEnabled) {
                     slowDownWheel();
                 }
 

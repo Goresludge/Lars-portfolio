@@ -63,7 +63,7 @@ class GameShowPanel {
             firstTransition(grid);
         }
 
-        String musicFile = "StartMusic.mp3";
+        String musicFile = "src/mp3/StartMusic.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));

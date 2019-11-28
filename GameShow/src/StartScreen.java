@@ -55,7 +55,7 @@ public class StartScreen {
 */
         setUpLayout(grid,lagnamn1Input1,lagnamn1Input2,buttonPlay);
 
-        String musicFile = "StartMusic.mp3";
+        String musicFile = "src/mp3/StartMusic.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
@@ -93,7 +93,7 @@ public class StartScreen {
                 if(enabled.get()){
                     String sfx = key.getCode().toString();
                     if(sfx.equals("A")){
-                        String musicFile = "Applause1.mp3";
+                        String musicFile = "src/mp3/Applause1.mp3";
                         Media sound = new Media(new File(musicFile).toURI().toString());
                         MediaPlayer mediaPlayerSFX = new MediaPlayer(sound);
                         mediaPlayerSFX.play();
