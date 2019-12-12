@@ -31,6 +31,23 @@ public class StartScreen {
     private static Button buttonPlay = new Button("KÖR IGÅNG SPELET");
     private static ScaleTransition scaleTransition = new ScaleTransition();
 
+    /*
+    Alla spel:
+    Fågelskådning
+    Bonus
+    Kulturfrågan
+    DJContest
+    Fiskespel
+    Gissa ordet x3
+    Jeopardy
+    Listan
+    Längsta ordet
+    Street Fighter
+    Vem där?
+    Vilket år?
+    Vilken stad?
+    */
+
     public static void display(Stage primaryStage) {
 
 
@@ -53,6 +70,8 @@ public class StartScreen {
         GridPane.setHalignment(karran,HPos.CENTER);
         grid.getChildren().addAll(karran);
 */
+
+
         setUpLayout(grid,lagnamn1Input1,lagnamn1Input2,buttonPlay);
 
         String musicFile = "src/mp3/StartMusic.mp3";
