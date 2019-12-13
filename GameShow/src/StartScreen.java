@@ -59,19 +59,6 @@ public class StartScreen {
 
         scene.getStylesheets().add("style.css");
 
-/*
-        ImageView karran = new ImageView("karran.jpg");
-        karran.setFitHeight(200);
-        karran.setFitWidth(200);
-        RotateTransition rotate = new RotateTransition(Duration.millis(1000), karran);
-        rotate.setByAngle(360);
-        rotate.setCycleCount(500);
-        rotate.play();
-        GridPane.setHalignment(karran,HPos.CENTER);
-        grid.getChildren().addAll(karran);
-*/
-
-
         setUpLayout(grid,lagnamn1Input1,lagnamn1Input2,buttonPlay);
 
         String musicFile = "src/mp3/StartMusic.mp3";
@@ -85,12 +72,12 @@ public class StartScreen {
         grid.setId("startScreen");
 
         buttonPlay.setOnAction(e -> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,1,1);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     enabled.set(false);
@@ -125,6 +112,7 @@ public class StartScreen {
     }
 
 
+/*
     private static void screenTransitionFrom(GridPane grid){
         ImageView image = new ImageView("img/star.png");
         image.setFitWidth(1);
@@ -140,7 +128,7 @@ public class StartScreen {
         scaleTransition.setAutoReverse(true);
         scaleTransition.play();
     }
-
+*/
     static double getScreenHeight(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         return screenSize.getHeight();

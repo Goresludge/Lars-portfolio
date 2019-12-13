@@ -110,7 +110,7 @@ class GameShowPanel {
                     grid.getColumnConstraints().clear();
                     grid.getRowConstraints().clear();
                     mediaPlayer.stop();
-                    GuessWord.display(grid);
+                    GuessWord.display(grid,"Film","James Bond Tomorrow Never Dies","i");
                     game2.setId("selectedButton");
                     game2.setDisable(true);
                 }
@@ -174,6 +174,47 @@ class GameShowPanel {
                     jeopardy.display(grid);
                     game5.setId("selectedButton");
                     game5.setDisable(true);
+                }
+            });
+
+        });
+
+        game6.setOnAction(e-> {
+            screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    GuessWord.display(grid,"Bok","Lord of the Rings The Fellowship of the Ring","w");
+                    game6.setId("selectedButton");
+                    game6.setDisable(true);
+                }
+            });
+        });
+
+        game7.setOnAction(e-> {
+            screenTransitionFrom(grid);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
+            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    Birdwatching.display(grid);
+                    game7.setId("selectedButton");
+                    game7.setDisable(true);
                 }
             });
 
@@ -281,6 +322,10 @@ class GameShowPanel {
     }
 
     private static void setupPanel(GridPane grid){
+
+        grid.setPadding(new Insets(10,10,10,10));
+        grid.setVgap(8);
+        grid.setHgap(10);
 
         grid.setId("root");
 
