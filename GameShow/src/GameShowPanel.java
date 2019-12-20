@@ -61,9 +61,7 @@ class GameShowPanel {
 
         setupPanel(grid);
 
-        if(!firstTransitionDone){
-            firstTransition(grid);
-        }
+        new ScreenTransitionTo(grid,3,2);
 
         String musicFile = "src/mp3/StartMusic.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
@@ -72,17 +70,13 @@ class GameShowPanel {
         mediaPlayer.play();
         mediaPlayer.setVolume(0.6);
 
-
-
-
-
         game1.setOnAction(e-> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -98,12 +92,12 @@ class GameShowPanel {
         });
 
         game2.setOnAction(e-> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -118,12 +112,12 @@ class GameShowPanel {
         });
 
         game3.setOnAction(e-> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -138,12 +132,12 @@ class GameShowPanel {
         });
 
         game4.setOnAction(e-> {
-            bonusTransition(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -159,12 +153,12 @@ class GameShowPanel {
         });
 
         game5.setOnAction(e-> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -180,12 +174,12 @@ class GameShowPanel {
         });
 
         game6.setOnAction(e-> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -200,12 +194,12 @@ class GameShowPanel {
         });
 
         game7.setOnAction(e-> {
-            screenTransitionFrom(grid);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
             timeline.play();
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
@@ -229,30 +223,6 @@ class GameShowPanel {
         labelPointLag1.setText("Poäng: " + Integer.toString(pointsLag1));
         labelPointLag2.setText("Poäng: " + Integer.toString(pointsLag2));
         display(grid);
-        screenTransitionTo(grid);
-    }
-
-    private static void firstTransition(GridPane grid){
-        ImageView image = new ImageView("img/star.png");
-        image.setFitHeight(StartScreen.getScreenHeight()*12);
-        image.setFitWidth(StartScreen.getScreenWidth()*8);
-        GridPane.setHalignment(image,HPos.CENTER);
-        GridPane.setValignment(image,VPos.CENTER);
-        grid.add(image,3,2);
-        scaleTransition.setDuration(Duration.millis(1500));
-        scaleTransition.setByX(-1.0);
-        scaleTransition.setByY(-1.0);
-        scaleTransition.setCycleCount(1);
-        scaleTransition.setNode(image);
-        scaleTransition.setAutoReverse(false);
-        scaleTransition.play();
-        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                firstTransitionDone = true;
-                grid.getChildren().remove(image);
-            }
-        });
     }
 
     private static void bonusTransition(GridPane grid){
@@ -271,51 +241,7 @@ class GameShowPanel {
         bonusTransition.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                screenTransitionFrom(grid);
-            }
-        });
-
-    }
-
-    private static void screenTransitionFrom(GridPane grid){
-        Circle circle = new Circle();
-        circle.setFill(Color.BLACK);
-        circle.setCenterX(1);
-        circle.setCenterY(1);
-        circle.setRadius(1);
-        GridPane.setHalignment(circle,HPos.CENTER);
-        GridPane.setValignment(circle,VPos.CENTER);
-        grid.add(circle,3,2);
-        scaleTransition.setDuration(Duration.millis(1000));
-        scaleTransition.setByX(1400);
-        scaleTransition.setByY(1400);
-        scaleTransition.setCycleCount(1);
-        scaleTransition.setNode(circle);
-        scaleTransition.setAutoReverse(true);
-        scaleTransition.play();
-    }
-
-    private static void screenTransitionTo(GridPane grid){
-        Circle circle = new Circle();
-        circle.setFill(Color.BLACK);
-        circle.setCenterX(50);
-        circle.setCenterY(50);
-        circle.setRadius(1400);
-        GridPane.setHalignment(circle,HPos.CENTER);
-        GridPane.setValignment(circle,VPos.CENTER);
-        grid.add(circle,3,2);
-        ScaleTransition scaleTransition = new ScaleTransition();
-        scaleTransition.setDuration(Duration.millis(1000));
-        scaleTransition.setByX(-1.0);
-        scaleTransition.setByY(-1.0);
-        scaleTransition.setCycleCount(1);
-        scaleTransition.setNode(circle);
-        scaleTransition.setAutoReverse(false);
-        scaleTransition.play();
-        scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                grid.getChildren().remove(circle);
+                new ScreenTransitionFrom(grid,3,2);
             }
         });
 

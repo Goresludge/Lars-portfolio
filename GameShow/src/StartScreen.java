@@ -29,7 +29,8 @@ public class StartScreen {
     private static TextField lagnamn1Input1 = new TextField("Lagnamn");
     private static TextField lagnamn1Input2 = new TextField("Lagnamn");
     private static Button buttonPlay = new Button("KÖR IGÅNG SPELET");
-    private static ScaleTransition scaleTransition = new ScaleTransition();
+    private static GridPane grid = new GridPane();
+    private static Scene scene = new Scene(grid,700,500);
 
     /*
     Alla spel:
@@ -50,12 +51,8 @@ public class StartScreen {
 
     public static void display(Stage primaryStage) {
 
-
         AtomicReference<Boolean> enabled = new AtomicReference<>(true);
         primaryStage.setTitle("GAME SHOW!!");
-
-        GridPane grid = new GridPane();
-        Scene scene = new Scene(grid,700,500);
 
         scene.getStylesheets().add("style.css");
 
@@ -105,30 +102,15 @@ public class StartScreen {
                         mediaPlayerSFX.play();
                     }
                 }
-
             }
         });
 
     }
 
-
-/*
-    private static void screenTransitionFrom(GridPane grid){
-        ImageView image = new ImageView("img/star.png");
-        image.setFitWidth(1);
-        image.setFitHeight(1);
-        GridPane.setHalignment(image, HPos.CENTER);
-        GridPane.setValignment(image, VPos.CENTER);
-        grid.add(image,1,1);
-        scaleTransition.setDuration(Duration.millis(1500));
-        scaleTransition.setByX(getScreenWidth()*8);
-        scaleTransition.setByY(getScreenHeight()*12);
-        scaleTransition.setCycleCount(1);
-        scaleTransition.setNode(image);
-        scaleTransition.setAutoReverse(true);
-        scaleTransition.play();
+    static Scene getScene(){
+        return scene;
     }
-*/
+
     static double getScreenHeight(){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         return screenSize.getHeight();
@@ -149,11 +131,9 @@ public class StartScreen {
 
     private static void setUpLayout(GridPane grid, TextField lagnamn1Input1, TextField lagnamn1Input2, Button buttonPlay){
 
-
         grid.setPadding(new Insets(10,10,10,10));
         grid.setVgap(8);
         grid.setHgap(10);
-
 
         lagnamn1Input1.setId("input");
         lagnamn1Input2.setId("input");

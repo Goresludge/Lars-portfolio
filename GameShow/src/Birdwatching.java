@@ -1,3 +1,4 @@
+import javafx.animation.PathTransition;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -7,6 +8,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
+
 import java.io.File;
 
 public class Birdwatching {
@@ -19,6 +25,7 @@ public class Birdwatching {
         lagB = new Button(StartScreen.getLagnamn2());
 
         setupScreen(grid);
+        grid.setId("BirdWatching");
         new ScreenTransitionTo(grid,3,2);
 
         String musicFile = "src/mp3/StreetFighter.mp3";
@@ -28,9 +35,35 @@ public class Birdwatching {
 
         ImageView binoculars = new ImageView("img/kikare.png");
         grid.add(binoculars,0,3);
-        binoculars.setFitWidth(StartScreen.getScreenWidth()*1.5);
+        binoculars.setFitWidth(StartScreen.getScreenWidth()*1.75);
         binoculars.setFitHeight(StartScreen.getScreenHeight()*1.75);
 
+        moveBinoculars(binoculars);
+
+
+    }
+
+    private static void intro(){
+
+    }
+
+    private static void moveBinoculars(ImageView binoculars){
+        double width = StartScreen.getScreenWidth();
+        double height = StartScreen.getScreenHeight();
+        double absLeft = width/8;
+        double absTop = height/3;
+        Path path = new Path();
+        MoveTo moveTo = new MoveTo(width/2, height/2);
+        LineTo line1 = new LineTo(absLeft*7,absTop);
+        path.getElements().add(moveTo);
+        path.getElements().addAll(line1);
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.millis(3000));
+        pathTransition.setNode(binoculars);
+        pathTransition.setPath(path);
+        pathTransition.setCycleCount(1);
+        pathTransition.setAutoReverse(false);
+        pathTransition.play();
     }
 
     private static void addButtons(GridPane grid, Button lagA, Button lagB){

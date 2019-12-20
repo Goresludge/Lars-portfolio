@@ -24,7 +24,7 @@ public class StreetFighterDuel {
         lagA = new Button(StartScreen.getLagnamn1());
         lagB = new Button(StartScreen.getLagnamn2());
 
-        grid.setId("StreetFighter");
+        grid.setId("BirdWatching");
 
         String musicFile = "src/mp3/StreetFighter.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());

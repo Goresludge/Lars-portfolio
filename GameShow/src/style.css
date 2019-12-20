@@ -207,3 +207,8 @@
    -fx-background-image: url('img/StreetFighter.jpg');
    -fx-background-size: stretch;
 }
+
+#BirdWatching{
+   -fx-background-image: url('img/birdForest.jpg');
+   -fx-background-size: stretch;
+}
