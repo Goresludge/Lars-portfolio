@@ -1,4 +1,9 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -17,6 +22,9 @@ import java.io.File;
 
 public class Birdwatching {
 
+    private static ImageView eagle = new ImageView("img/eagle.png");
+    private static ImageView binoculars = new ImageView("img/kikare.png");
+
     public static void display(GridPane grid) {
 
         Button lagA;
@@ -28,15 +36,25 @@ public class Birdwatching {
         grid.setId("BirdWatching");
         new ScreenTransitionTo(grid,3,2);
 
-        String musicFile = "src/mp3/StreetFighter.mp3";
+        String musicFile = "src/mp3/bird_sounds.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 
-        ImageView binoculars = new ImageView("img/kikare.png");
+        grid.add(eagle,0,0);
         grid.add(binoculars,0,3);
         binoculars.setFitWidth(StartScreen.getScreenWidth()*1.75);
         binoculars.setFitHeight(StartScreen.getScreenHeight()*1.75);
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(16.5)));
+        timeline.play();
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                moveEagle(grid);
+            }
+        });
 
         moveBinoculars(binoculars);
 
@@ -57,15 +75,55 @@ public class Birdwatching {
         LineTo line1 = new LineTo(absLeft*6,absTop);
         LineTo line2 = new LineTo(absLeft*7,absTop);
         LineTo line3 = new LineTo(absLeft*7,absTop*3);
+        LineTo line4 = new LineTo(absLeft*5,absTop*3);
+        LineTo line5 = new LineTo(absLeft*3,absTop*1);
+        LineTo line6 = new LineTo(absLeft*4.5,absTop);
+        LineTo line7 = new LineTo(absLeft*2.5,absTop*3);
+        LineTo line8 = new LineTo(absLeft*2,absTop);
+        LineTo line9 = new LineTo(absLeft,absTop*3);
+        LineTo fin = new LineTo(absLeft,absTop);
         path.getElements().add(moveTo);
-        path.getElements().addAll(line1,line2,line3);
+        path.getElements().addAll(line1,line2,line3,line4,line5,line6,line7,line8,line9,fin);
         PathTransition pathTransition = new PathTransition();
-        pathTransition.setDuration(Duration.millis(10000));
+        pathTransition.setDuration(Duration.seconds(35));
         pathTransition.setNode(binoculars);
         pathTransition.setPath(path);
         pathTransition.setCycleCount(1);
         pathTransition.setAutoReverse(false);
         pathTransition.play();
+    }
+
+    private static void moveEagle(GridPane grid){
+        String musicFile = "src/mp3/eagle_sfx.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+
+        double width = StartScreen.getScreenWidth();
+        double height = StartScreen.getScreenHeight();
+        double absLeft = width/8;
+        double absTop = height/3;
+        eagle.setFitHeight(height/3);
+        eagle.setFitWidth(width/3);
+        Path path = new Path();
+        MoveTo moveTo = new MoveTo(width/1.5, 0);
+        LineTo line = new LineTo(absLeft*3,absTop*2);
+        path.getElements().add(moveTo);
+        path.getElements().addAll(line);
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.millis(3000));
+        pathTransition.setNode(eagle);
+        pathTransition.setPath(path);
+        pathTransition.setCycleCount(1);
+        pathTransition.setAutoReverse(false);
+        pathTransition.play();
+        pathTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().remove(eagle);
+            }
+        });
+
     }
 
     private static void addButtons(GridPane grid, Button lagA, Button lagB){
