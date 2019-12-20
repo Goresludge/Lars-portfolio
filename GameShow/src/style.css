@@ -209,6 +209,6 @@
 }
 
 #BirdWatching{
-   -fx-background-image: url('img/birdForest.jpg');
+   -fx-background-image: url('img/birdForestWith.jpg');
    -fx-background-size: stretch;
 }

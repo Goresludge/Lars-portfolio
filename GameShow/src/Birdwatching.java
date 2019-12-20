@@ -54,11 +54,13 @@ public class Birdwatching {
         double absTop = height/3;
         Path path = new Path();
         MoveTo moveTo = new MoveTo(width/2, height/2);
-        LineTo line1 = new LineTo(absLeft*7,absTop);
+        LineTo line1 = new LineTo(absLeft*6,absTop);
+        LineTo line2 = new LineTo(absLeft*7,absTop);
+        LineTo line3 = new LineTo(absLeft*7,absTop*3);
         path.getElements().add(moveTo);
-        path.getElements().addAll(line1);
+        path.getElements().addAll(line1,line2,line3);
         PathTransition pathTransition = new PathTransition();
-        pathTransition.setDuration(Duration.millis(3000));
+        pathTransition.setDuration(Duration.millis(10000));
         pathTransition.setNode(binoculars);
         pathTransition.setPath(path);
         pathTransition.setCycleCount(1);

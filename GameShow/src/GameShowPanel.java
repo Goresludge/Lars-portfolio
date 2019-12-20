@@ -217,7 +217,6 @@ class GameShowPanel {
 
 
     static void result(GridPane grid, int a, int b) {
-
         pointsLag1 += a;
         pointsLag2 += b;
         labelPointLag1.setText("Poäng: " + Integer.toString(pointsLag1));
