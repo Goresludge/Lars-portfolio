@@ -83,7 +83,7 @@ public class StartScreen {
                     grid.getRowConstraints().clear();
                     grid.setId("null");
                     mediaPlayer.stop();
-                    Birdwatching.display(grid);
+                    GameShowPanel.display(grid);
                 }
             });
         });

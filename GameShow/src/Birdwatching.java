@@ -1,5 +1,4 @@
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -24,6 +23,8 @@ public class Birdwatching {
 
     private static ImageView eagle = new ImageView("img/eagle.png");
     private static ImageView binoculars = new ImageView("img/kikare.png");
+    private static MediaPlayer mediaPlayer;
+    private static MediaPlayer eaglePlayer;
 
     public static void display(GridPane grid) {
 
@@ -38,7 +39,7 @@ public class Birdwatching {
 
         String musicFile = "src/mp3/bird_sounds.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
 
         grid.add(eagle,0,0);
@@ -57,8 +58,6 @@ public class Birdwatching {
         });
 
         moveBinoculars(binoculars);
-
-
     }
 
     private static void intro(){
@@ -96,8 +95,8 @@ public class Birdwatching {
     private static void moveEagle(GridPane grid){
         String musicFile = "src/mp3/eagle_sfx.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+        eaglePlayer = new MediaPlayer(sound);
+        eaglePlayer.play();
 
         double width = StartScreen.getScreenWidth();
         double height = StartScreen.getScreenHeight();
@@ -175,5 +174,3 @@ public class Birdwatching {
         grid.getColumnConstraints().addAll(col1, col2, col3, col4, col5, col6, col7);
     }
 }
-
-

@@ -35,7 +35,7 @@ public class GuessWord {
     private static ScaleTransition scaleTransition = new ScaleTransition();
 
 
-    public static void display(GridPane grid,String hint,String word,String bonus) {
+    public static void display(GridPane grid) {
 
         grid.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent key) {
@@ -45,9 +45,6 @@ public class GuessWord {
 
             }
         });
-        hints.add(hint);
-        words.add(word);
-        bonusLetters.add(bonus);
 
         Button lagA;
         Button lagB;
@@ -63,64 +60,66 @@ public class GuessWord {
 
         setupScreen(grid);
         setupTeamButtons(grid,lagA,lagB);
+
         lagA.setOnAction(e -> {
-            screenTransitionFrom(grid);
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    hints.clear();
-                    words.clear();
-                    bonusLetters.clear();
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    gameEnabled = false;
-                    GameShowPanel.result(grid, 5, 0);
-                }
-            });
-            /*
+
             if(currentGame == words.size()){
+                screenTransitionFrom(grid);
+                scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        hints.clear();
+                        words.clear();
+                        bonusLetters.clear();
+                        grid.getChildren().clear();
+                        grid.getColumnConstraints().clear();
+                        grid.getRowConstraints().clear();
+                        mediaPlayer.stop();
+                        gameEnabled = false;
+                        lag1points+=3;
+                        GameShowPanel.result(grid, lag1points, lag2points);
+                    }
+                });
 
             }
             else {
                 grid.getChildren().clear();
-                lag1points++;
+                lag1points+=3;
                 currentGame++;
                 currentWord = "";
                 setupTeamButtons(grid,lagA,lagB);
                 nextGame(grid);
             }
-*/
+
         });
         lagB.setOnAction(e -> {
-            screenTransitionFrom(grid);
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    gameEnabled = false;
-                    GameShowPanel.result(grid, 0, 5);
-                }
-            });
-/*
             if(currentGame == words.size()){
+                screenTransitionFrom(grid);
+                scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        grid.getChildren().clear();
+                        grid.getColumnConstraints().clear();
+                        grid.getRowConstraints().clear();
+                        mediaPlayer.stop();
+                        gameEnabled = false;
+                        lag2points+=3;
+                        GameShowPanel.result(grid, lag1points, lag2points);
+                    }
+                });
 
             }
             else {
                 grid.getChildren().clear();
-                lag2points++;
+                lag2points+=3;
                 currentGame++;
                 setupTeamButtons(grid,lagA,lagB);
                 nextGame(grid);
             }
-            */
+
         });
 
-        //gameAttributes();
+        gameAttributes();
         nextGame(grid);
         screenTransitionTo(grid);
     }
@@ -166,7 +165,7 @@ public class GuessWord {
         scaleTransition.setAutoReverse(true);
         scaleTransition.play();
     }
-/*
+
     private static void gameAttributes(){
 
         String hint1 = "Film";
@@ -191,7 +190,7 @@ public class GuessWord {
 
 
     }
-*/
+
     private static void nextGame(GridPane grid){
 
         wrongGuess = 0;
@@ -360,6 +359,7 @@ public class GuessWord {
                     Button b = new Button(s);
                     if(currentBonus.equals(s)){
                         b.setId("guessWordBonus");
+                        //add sfx
                     }
                     else {
                         b.setId("guessWord");

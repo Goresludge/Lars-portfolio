@@ -6,6 +6,18 @@
     -fx-background-color: #121871;
 }
 
+#black{
+    -fx-background-color: black;
+}
+
+#blue{
+    -fx-background-color: blue;
+}
+
+#red{
+    -fx-background-color: red;
+}
+
 #jeopardyLabels{
     -fx-font: normal bold 40px 'Chalkduster';
     -fx-text-fill: white;
@@ -65,7 +77,7 @@
 
 #guessWord{
         -fx-font-weight: bold;
-        -fx-font-size: 35px;
+        -fx-font-size: 25px;
         -fx-background-color:
             linear-gradient(#f2f2f2, #d6d6d6),
             linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
@@ -78,7 +90,7 @@
 
 #guessWordBonus{
         -fx-font-weight: bold;
-        -fx-font-size: 35px;
+        -fx-font-size: 25px;
         -fx-background-color:
             linear-gradient(#40a53e, #1e661d),
             linear-gradient(#40a53e 0%, #1e661d 20%, #1e661d 100%),
@@ -210,5 +222,10 @@
 
 #BirdWatching{
    -fx-background-image: url('img/birdForestWith.jpg');
+   -fx-background-size: stretch;
+}
+
+#BirdWatchingIntro{
+   -fx-background-image: url('img/birdForest.jpg');
    -fx-background-size: stretch;
 }

@@ -256,7 +256,6 @@ public class jeopardy {
             }
             i[0]++;
         });
-
     }
 
     private static void hideQuestion(Button button,GridPane grid){
