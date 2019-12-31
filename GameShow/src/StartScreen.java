@@ -1,22 +1,16 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -31,6 +25,10 @@ public class StartScreen {
     private static Button buttonPlay = new Button("KÖR IGÅNG SPELET");
     private static GridPane grid = new GridPane();
     private static Scene scene = new Scene(grid,700,500);
+    private static String musicFile = "src/mp3/Applause1.mp3";
+    private static Media sound = new Media(new File(musicFile).toURI().toString());
+    private static MediaPlayer mediaPlayerSFX = new MediaPlayer(sound);
+
 
     /*
     Alla spel:
@@ -63,7 +61,7 @@ public class StartScreen {
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
-        mediaPlayer.setVolume(0.7);
+        mediaPlayer.setVolume(0.5);
 
         buttonPlay.setId("startButton");
         grid.setId("startScreen");
@@ -95,10 +93,7 @@ public class StartScreen {
             public void handle(KeyEvent key) {
                 if(enabled.get()){
                     String sfx = key.getCode().toString();
-                    if(sfx.equals("A")){
-                        String musicFile = "src/mp3/Applause1.mp3";
-                        Media sound = new Media(new File(musicFile).toURI().toString());
-                        MediaPlayer mediaPlayerSFX = new MediaPlayer(sound);
+                    if(sfx.equals("DIGIT1")){
                         mediaPlayerSFX.play();
                     }
                 }

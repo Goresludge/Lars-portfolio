@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import java.io.File;
 
@@ -28,14 +26,14 @@ class GameShowPanel {
     private static Button game6 = new Button("6");
     private static Button game7 = new Button("7");
     private static Button game8 = new Button("8");
-    private static Button game9 = new Button("9");/*
+    private static Button game9 = new Button("9");
     private static Button game10 = new Button("10");
     private static Button game11 = new Button("11");
     private static Button game12 = new Button("12");
     private static Button game13 = new Button("13");
     private static Button game14 = new Button("14");
     private static Button game15 = new Button("15");
-    private static Button game16 = new Button("16");
+    private static Button game16 = new Button("16");/*
     private static Button game17 = new Button("17");
     private static Button game18 = new Button("18");
     private static Button game19 = new Button("19");
@@ -46,7 +44,7 @@ class GameShowPanel {
     private static Button game24 = new Button("24");
     private static Button game25 = new Button("25");
     */
-    private static Button[] buttons = new Button[9];
+    private static Button[] buttons = new Button[16];
     private static Label labelPointLag1 = new Label("Poäng: 0");
     private static Label labelPointLag2 = new Label("Poäng: 0");
     private static int pointsLag1;
@@ -58,7 +56,7 @@ class GameShowPanel {
 
         setupPanel(grid);
 
-        new ScreenTransitionTo(grid,2,1);
+        new ScreenTransitionTo(grid,3,2);
 
         String musicFile = "src/mp3/StartMusic.mp3";
         Media sound = new Media(new File(musicFile).toURI().toString());
@@ -68,7 +66,7 @@ class GameShowPanel {
         mediaPlayer.setVolume(0.6);
 
         game1.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -89,7 +87,7 @@ class GameShowPanel {
         });
 
         game2.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -109,7 +107,7 @@ class GameShowPanel {
         });
 
         game3.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -129,7 +127,7 @@ class GameShowPanel {
         });
 
         game4.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -150,7 +148,7 @@ class GameShowPanel {
         });
 
         game5.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -171,7 +169,7 @@ class GameShowPanel {
         });
 
         game6.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -188,11 +186,10 @@ class GameShowPanel {
                     game6.setDisable(true);
                 }
             });
-
         });
 
         game7.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,2,1);
+            new ScreenTransitionFrom(grid,3,2);
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1),
                             new KeyValue(mediaPlayer.volumeProperty(), 0)));
@@ -209,11 +206,28 @@ class GameShowPanel {
                     game7.setDisable(true);
                 }
             });
+        });
 
+        game8.setOnAction(e-> {
+            new ScreenTransitionFrom(grid,3,2);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1),
+                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
+            timeline.play();
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.stop();
+                    MusicQuiz.display(grid);
+                    game8.setId("selectedButton");
+                    game8.setDisable(true);
+                }
+            });
         });
     }
-
-
     static void result(GridPane grid, int a, int b) {
         pointsLag1 += a;
         pointsLag2 += b;
@@ -238,10 +252,9 @@ class GameShowPanel {
         bonusTransition.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                new ScreenTransitionFrom(grid,2,1);
+                new ScreenTransitionFrom(grid,3,2);
             }
         });
-
     }
 
     private static void setupPanel(GridPane grid){
@@ -261,7 +274,6 @@ class GameShowPanel {
         buttons[6] = game7;
         buttons[7] = game8;
         buttons[8] = game9;
-        /*
         buttons[9] = game10;
         buttons[10] = game11;
         buttons[11] = game12;
@@ -269,6 +281,7 @@ class GameShowPanel {
         buttons[13] = game14;
         buttons[14] = game15;
         buttons[15] = game16;
+        /*
         buttons[16] = game17;
         buttons[17] = game18;
         buttons[18] = game19;
@@ -288,6 +301,12 @@ class GameShowPanel {
         int j = 0;
         for (Button b: buttons
              ) {
+            if(i == 3){
+                i++;
+            }
+            if(j == 2){
+                j++;
+            }
             GridPane.setConstraints(b,i,j);
             GridPane.setFillWidth(b,true);
             GridPane.setFillHeight(b,true);
@@ -296,28 +315,28 @@ class GameShowPanel {
             }
             b.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
             i++;
-            if(i == 4){
+            if(i == 6){
                 j++;
                 i = 1;
             }
         }
 
-
         labelPointLag1.setId("points");
         labelPointLag2.setId("points");
         GridPane.setConstraints(labelPointLag1,0,1);
-        GridPane.setConstraints(labelPointLag2,4,1);
+        GridPane.setConstraints(labelPointLag2,6,1);
         GridPane.setHalignment(labelPointLag1,HPos.CENTER);
         GridPane.setHalignment(labelPointLag2,HPos.CENTER);
 
         GridPane.setConstraints(lagnamn1,0,0);
-        GridPane.setConstraints(lagnamn2,4,0);
+        GridPane.setConstraints(lagnamn2,6,0);
         GridPane.setHalignment(lagnamn1,HPos.CENTER);
         GridPane.setHalignment(lagnamn2,HPos.CENTER);
 
 
         grid.getChildren().addAll(lagnamn1,lagnamn2,labelPointLag1,labelPointLag2,game1,game2,game3,
-                game4,game5,game6,game7,game8,game9);
+                game4,game5,game6,game7,game8,game9,game10,game11,game12,
+                game13,game14,game15,game16);
 
         /*
         ,game10,game11,game12,
@@ -328,21 +347,29 @@ class GameShowPanel {
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(15);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(70.0/3);
+        col2.setPercentWidth(70.0/4);
         ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(70.0/3);
+        col3.setPercentWidth(70.0/4);
         ColumnConstraints col4 = new ColumnConstraints();
-        col4.setPercentWidth(70.0/3);
+        col4.setPercentWidth(0);
         ColumnConstraints col5 = new ColumnConstraints();
-        col5.setPercentWidth(15);
+        col5.setPercentWidth(70.0/4);
+        ColumnConstraints col6 = new ColumnConstraints();
+        col6.setPercentWidth(70.0/4);
+        ColumnConstraints col7 = new ColumnConstraints();
+        col7.setPercentWidth(15);
         RowConstraints row1 = new RowConstraints();
-        row1.setPercentHeight(33);
+        row1.setPercentHeight(25);
         RowConstraints row2 = new RowConstraints();
-        row2.setPercentHeight(33);
+        row2.setPercentHeight(25);
         RowConstraints row3 = new RowConstraints();
-        row3.setPercentHeight(33);
-        grid.getRowConstraints().addAll(row1,row2,row3);
-        grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5);
+        row3.setPercentHeight(0);
+        RowConstraints row4 = new RowConstraints();
+        row4.setPercentHeight(25);
+        RowConstraints row5 = new RowConstraints();
+        row5.setPercentHeight(25);
+        grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
+        grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
 
 
 

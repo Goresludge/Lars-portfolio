@@ -24,6 +24,12 @@
     -fx-text-alignment: center;
 }
 
+#musicLabels{
+    -fx-font: normal bold 40px 'Chalkduster';
+    -fx-text-fill: black;
+    -fx-text-alignment: center;
+}
+
 #jeopardyButtons{
     -fx-padding: 8 15 15 15;
     -fx-background-color: #121871;
@@ -213,6 +219,11 @@
 #startButton Text {
     -fx-fill: white;
     -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+
+#MusicQuiz{
+    -fx-background-image: url('img/musikquiz.jpg');
+    -fx-background-size: stretch;
 }
 
 #StreetFighter{

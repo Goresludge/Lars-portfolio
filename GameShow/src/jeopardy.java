@@ -54,8 +54,6 @@ public class jeopardy {
 
     static void display(GridPane grid){
 
-
-
         setupPanel(grid);
         screenTransitionTo(grid);
         displayButton.setOpacity(0);
@@ -460,7 +458,6 @@ public class jeopardy {
         row5.setPercentHeight(20);
         grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
         grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
-
     }
 
     private static void screenTransitionFrom(GridPane grid){

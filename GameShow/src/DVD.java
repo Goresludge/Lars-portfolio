@@ -117,15 +117,18 @@ public class DVD {
         LineTo lineR2 = new LineTo(absRight,absBot/2);
         LineTo lineR3 = new LineTo(absRight,absBot/1.5);
         path.getElements().add(moveTo);
-        path.getElements().addAll(lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3,lineLT
-        ,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,
-                lineR2,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3,lineLT
-                ,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,
-                lineR2,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3,lineLT
-                ,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,
-                lineR2,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3,lineLT
-                ,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,
-                lineR2,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineT1,lineL1,lineB2,lineT4,lineR1,lineB5,lineT4,lineB3,lineT2,lineB1,lineMidMid);
+        path.getElements().addAll(lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3
+                ,lineR2,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3
+                ,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3,lineLT
+                ,lineB2,lineT4,lineR2,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3
+                ,lineLT,lineB2,lineT4,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4
+                ,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2,lineB3,lineLT,lineB2,lineT4
+                ,lineR2,lineB3,lineL1,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3
+                ,lineB1,lineT3,lineR2,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineL1
+                ,lineT2,lineR3,lineB4,lineT4,lineB3,lineT2,lineL3,lineB1,lineT3,lineR2
+                ,lineB3,lineLT,lineB2,lineT4,lineR2,lineB3,lineT2,lineL3,lineB1,lineT3
+                ,lineR2,lineB3,lineLT,lineB2);
+//91
         gameTransition.setDuration(Duration.seconds(300));
         gameTransition.setNode(imageView);
         gameTransition.setPath(path);
@@ -310,6 +313,16 @@ public class DVD {
                 rotateTransition4.stop();
             }
         });
+        Timeline timeline65 = new Timeline(
+                new KeyFrame(Duration.millis(65000)));
+        timeline65.play();
+        timeline65.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                grid.getChildren().removeAll();
+                addButtons(grid);
+            }
+        });
 
     }
 
@@ -357,61 +370,117 @@ public class DVD {
 
     private static void addButtons(GridPane grid){
 
+        grid.getColumnConstraints().clear();
+        grid.getRowConstraints().clear();
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(15);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(14);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(14);
+        ColumnConstraints col4 = new ColumnConstraints();
+        col4.setPercentWidth(14);
+        ColumnConstraints col5 = new ColumnConstraints();
+        col5.setPercentWidth(14);
+        ColumnConstraints col6 = new ColumnConstraints();
+        col6.setPercentWidth(14);
+        ColumnConstraints col7 = new ColumnConstraints();
+        col7.setPercentWidth(15);
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(20);
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(20);
+        RowConstraints row3 = new RowConstraints();
+        row3.setPercentHeight(20);
+        RowConstraints row4 = new RowConstraints();
+        row4.setPercentHeight(20);
+        RowConstraints row5 = new RowConstraints();
+        row5.setPercentHeight(20);
+        grid.getRowConstraints().addAll(row1,row2,row3,row4,row5);
+        grid.getColumnConstraints().addAll(col1,col2,col3,col4,col5,col6,col7);
+
         Button lagA;
         Button lagB;
+        Button tie;
         lagA = new Button(StartScreen.getLagnamn1());
         lagB = new Button(StartScreen.getLagnamn2());
+        tie = new Button("Oavgjort!");
 
-        //setupScreen(grid,lagA,lagB);
-        /*
+        GridPane.setConstraints(lagA,0,4);
+        GridPane.setConstraints(lagB,6,4);
+        GridPane.setConstraints(tie,3,4);
+        GridPane.setHalignment(lagA,HPos.CENTER);
+        GridPane.setHalignment(lagB,HPos.CENTER);
+        GridPane.setHalignment(tie,HPos.CENTER);
+
+        lagA.setId("teamButtons");
+        lagB.setId("teamButtons");
+        tie.setId("teamButtons");
+
+        GridPane.setFillWidth(lagA,true);
+        GridPane.setFillWidth(lagB,true);
+        GridPane.setFillWidth(tie,true);
+
+        grid.getChildren().addAll(lagA,lagB,tie);
+
         lagA.setOnAction(e -> {
-            new creenTransitionFrom(grid);
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            new ScreenTransitionFrom(grid,3,2);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1)));
+            timeline.play();
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
                     grid.getColumnConstraints().clear();
                     grid.getRowConstraints().clear();
-                    grid.setBackground(null);
-                    GameShowPanel.result(grid,3,0);
+                    mediaPlayer.dispose();
+                    GameShowPanel.result(grid,5,0);
                 }
             });
         });
+
         lagB.setOnAction(e -> {
-            screenTransitionFrom(grid);
-            scaleTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            new ScreenTransitionFrom(grid,3,2);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1)));
+            timeline.play();
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     grid.getChildren().clear();
                     grid.getColumnConstraints().clear();
                     grid.getRowConstraints().clear();
-                    grid.setBackground(null);
-                    GameShowPanel.result(grid,0,3);
+                    mediaPlayer.dispose();
+                    GameShowPanel.result(grid,0,5);
                 }
             });
-
         });
 
-         */
+        tie.setOnAction(e -> {
+            new ScreenTransitionFrom(grid,3,2);
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(1)));
+            timeline.play();
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    grid.getChildren().clear();
+                    grid.getColumnConstraints().clear();
+                    grid.getRowConstraints().clear();
+                    mediaPlayer.dispose();
+                    GameShowPanel.result(grid,5,5);
+                }
+            });
+        });
+
     }
 
     private static void setupScreen(GridPane grid){
         grid.setPadding(new Insets(0,0,0,0));
         grid.setVgap(0);
         grid.setHgap(0);
-/*
-        GridPane.setConstraints(lagA,0,4);
-        GridPane.setConstraints(lagB,6,4);
-        GridPane.setHalignment(lagA,HPos.CENTER);
-        GridPane.setHalignment(lagB,HPos.CENTER);
 
-        lagA.setId("teamButtons");
-        lagB.setId("teamButtons");
-
-        GridPane.setFillWidth(lagA,true);
-        GridPane.setFillWidth(lagB,true);
-
-        grid.getChildren().addAll(lagA,lagB);
-*/
     }
 }
