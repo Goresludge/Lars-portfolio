@@ -79,7 +79,7 @@ public class MusicQuiz {
         grid.setHgap(10);
 
 
-        Font.loadFont(jeopardy.class.getResource("font/Chalkduster.ttf").toExternalForm(), 10);
+        Font.loadFont(Jeopardy.class.getResource("font/Chalkduster.ttf").toExternalForm(), 10);
 
         labelPointLag1.setId("musicLabels");
         labelPointLag2.setId("musicLabels");

@@ -1,7 +1,4 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -15,6 +12,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import java.io.File;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
 
 class GameShowPanel {
 
@@ -33,17 +33,7 @@ class GameShowPanel {
     private static Button game13 = new Button("13");
     private static Button game14 = new Button("14");
     private static Button game15 = new Button("15");
-    private static Button game16 = new Button("16");/*
-    private static Button game17 = new Button("17");
-    private static Button game18 = new Button("18");
-    private static Button game19 = new Button("19");
-    private static Button game20 = new Button("20");
-    private static Button game21 = new Button("21");
-    private static Button game22 = new Button("22");
-    private static Button game23 = new Button("23");
-    private static Button game24 = new Button("24");
-    private static Button game25 = new Button("25");
-    */
+    private static Button game16 = new Button("16");
     private static Button[] buttons = new Button[16];
     private static Label labelPointLag1 = new Label("Poäng: 0");
     private static Label labelPointLag2 = new Label("Poäng: 0");
@@ -51,183 +41,112 @@ class GameShowPanel {
     private static int pointsLag2;
     private static Label lagnamn1 = new Label(StartScreen.getLagnamn1());
     private static Label lagnamn2 = new Label(StartScreen.getLagnamn2());
+    private static String musicFile = "src/mp3/StartMusic.mp3";
+    private static Media sound = new Media(new File(musicFile).toURI().toString());
+    private static MediaPlayer mediaPlayer = new MediaPlayer(sound);
+    private static List<Integer> list = new ArrayList<Integer>(){{add(1); add(2);add(3);
+        add(4); add(5);add(6);add(7);add(8);}};
 
-    static void display(GridPane grid){
+    public static void display(GridPane grid){
 
         setupPanel(grid);
 
         new ScreenTransitionTo(grid,3,2);
 
-        String musicFile = "src/mp3/StartMusic.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
         mediaPlayer.setVolume(0.6);
 
-        game1.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    StreetFighterDuel.display(grid);
-                    game1.setId("selectedButton");
-                    game1.setDisable(true);
-                }
-            });
 
+        game1.setOnAction(e-> {
+            int id = randomNumber();
+            runGame(grid,id,game1);
         });
 
         game2.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    GuessWord.display(grid);
-                    game2.setId("selectedButton");
-                    game2.setDisable(true);
-                }
-            });
+            int id = randomNumber();
+            runGame(grid,id,game2);
         });
 
         game3.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    LongestWord.display(grid);
-                    game3.setId("selectedButton");
-                    game3.setDisable(true);
-                }
-            });
+            int id = randomNumber();
+            runGame(grid,id,game3);
         });
 
         game4.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    BonusSpin.display(grid);
-                    game4.setId("selectedButton");
-                    game4.setDisable(true);
-                }
-            });
-
+            int id = randomNumber();
+            runGame(grid,id,game4);
         });
 
         game5.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    jeopardy.display(grid);
-                    game5.setId("selectedButton");
-                    game5.setDisable(true);
-                }
-            });
-
+            int id = randomNumber();
+            runGame(grid,id,game5);
         });
 
         game6.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    DVD.display(grid);
-                    game6.setId("selectedButton");
-                    game6.setDisable(true);
-                }
-            });
+            int id = randomNumber();
+            runGame(grid,id,game6);
         });
 
         game7.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    Birdwatching.display(grid);
-                    game7.setId("selectedButton");
-                    game7.setDisable(true);
-                }
-            });
+            int id = randomNumber();
+            runGame(grid,id,game7);
         });
 
         game8.setOnAction(e-> {
-            new ScreenTransitionFrom(grid,3,2);
-            Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(1),
-                            new KeyValue(mediaPlayer.volumeProperty(), 0)));
-            timeline.play();
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    grid.getChildren().clear();
-                    grid.getColumnConstraints().clear();
-                    grid.getRowConstraints().clear();
-                    mediaPlayer.stop();
-                    MusicQuiz.display(grid);
-                    game8.setId("selectedButton");
-                    game8.setDisable(true);
-                }
-            });
+            int id = randomNumber();
+            runGame(grid,id,game8);
         });
     }
+
+    private static int randomNumber(){
+
+        Random rand = new Random();
+        int id = list.get(rand.nextInt(list.size()));
+        list.removeIf(list->list.equals(id));
+        return id;
+    }
+
+    private static void runGame(GridPane grid, int id, Button button){
+
+        button.setId("selectedButton");
+        button.setDisable(true);
+
+        new ScreenTransitionFrom(grid,3,2);
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1),
+                        new KeyValue(mediaPlayer.volumeProperty(), 0)));
+        timeline.play();
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                grid.getChildren().clear();
+                grid.getColumnConstraints().clear();
+                grid.getRowConstraints().clear();
+                mediaPlayer.stop();
+                switch (id){
+                    case 1: StreetFighterDuel.display(grid);
+                            break;
+                    case 2: GuessWord.display(grid);
+                            break;
+                    case 3: LongestWord.display(grid);
+                            break;
+                    case 4: BonusSpin.display(grid);
+                            break;
+                    case 5: Jeopardy.display(grid);
+                            break;
+                    case 6: DVD.display(grid);
+                            break;
+                    case 7: Birdwatching.display(grid);
+                            break;
+                    case 8: MusicQuiz.display(grid);
+                            break;
+                }
+
+            }
+        });
+    }
+
     static void result(GridPane grid, int a, int b) {
         pointsLag1 += a;
         pointsLag2 += b;
@@ -281,17 +200,6 @@ class GameShowPanel {
         buttons[13] = game14;
         buttons[14] = game15;
         buttons[15] = game16;
-        /*
-        buttons[16] = game17;
-        buttons[17] = game18;
-        buttons[18] = game19;
-        buttons[19] = game20;
-        buttons[20] = game21;
-        buttons[21] = game22;
-        buttons[22] = game23;
-        buttons[23] = game24;
-        buttons[24] = game25;
-        */
 
         grid.setPadding(new Insets(10,10,10,10));
         grid.setVgap(8);

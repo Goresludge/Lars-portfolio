@@ -162,7 +162,7 @@ public class Birdwatching {
     private static void addButtons(GridPane grid){
 
         grid.setId("BirdWatchingIntro");
-        Font.loadFont(jeopardy.class.getResource("font/Chalkduster.ttf").toExternalForm(), 10);
+        Font.loadFont(Jeopardy.class.getResource("font/Chalkduster.ttf").toExternalForm(), 10);
 
         labelPointLag1.setId("jeopardyLabels");
         labelPointLag2.setId("jeopardyLabels");

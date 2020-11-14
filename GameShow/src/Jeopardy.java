@@ -22,7 +22,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-public class jeopardy {
+public class Jeopardy {
 
     private static Button category1 = new Button("IKEA-\nKÄNDISAR");
     private static Button category2 = new Button("LÅTTEXTER\nAV QUEEN");
@@ -402,7 +402,7 @@ public class jeopardy {
             }
         }
 
-        Font.loadFont(jeopardy.class.getResource("font/Chalkduster.ttf").toExternalForm(), 10);
+        Font.loadFont(Jeopardy.class.getResource("font/Chalkduster.ttf").toExternalForm(), 10);
 
         labelPointLag1.setId("jeopardyLabels");
         labelPointLag2.setId("jeopardyLabels");
