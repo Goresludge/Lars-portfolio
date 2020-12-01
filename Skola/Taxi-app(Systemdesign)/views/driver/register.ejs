@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+        <script src="/socket.io/socket.io.js" defer></script>
+        <script src="https://vuejs.org/js/vue.js" defer></script>
+        <script src="/js/main.js"></script>
+        <meta charset="UTF-8">
+        <title>Register driver</title>
+    </head>
+
+    <body>
+        <form  method="post" action="<%=action %>" id="form">
+            <main style="height: 600px">
+            <div id="top">
+                <header><h1>Register driver</h1></header>
+            </div>
+<div id="input">
+    <p>
+        <label for="name">Fullständigt namn</label>
+        <br/>
+        <input type="text" id="name" name="name">
+    </p>
+    <p>
+        <label for="phone">Telefonnummer</label>
+        <br/>
+        <input type="tel" id="phone" name="phone">
+    </p>
+    <p>
+        <label for="email">E-mail</label>
+        <br/>
+        <input type="email" id="email" name="email">
+    </p>
+    <p>
+        <label for="car">Car</label>
+        <br/>
+        <input type="text" id="car" name="car">
+    </p>
+    <p>
+        <label for="password">Lösenord</label>
+        <br/>
+        <input type="password" id="password" name="password">
+    </p>
+    <p>
+            <label>Passengers <input type="number" min="1" max="10" id="passengers" name="passengers" value="4" /> </label>
+        </p>
+        <p>
+            <label><input type="checkbox" name="djur" /> Djur </label>
+        </p>
+        <p>
+            <label><input type="checkbox" name="fardtjanst" /> Färdtjänst </label>
+        </p>
+        <p>
+            <label><input type="checkbox" name="rullstolsbunden" /> Rullstolsbunden </label>
+        </p>
+    
+    
+    <p>
+        <!--<label>XY</label>-->
+        <br/>
+        <input type="hidden" value="0" name="lat">
+        <input type="hidden" value="0" name="lng">
+    </p>
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a href="/driver/login">Tillbaka</a>
+    </div>
+    <div class="but_single but_right">
+        <a onclick="nextForm()" href="#">Registrera</a>
+    </div>
+    <div class="clear"></div>
+</div>
+</main>
+</form>
+</body>
+
+</html>

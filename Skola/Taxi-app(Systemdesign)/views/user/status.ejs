@@ -1,0 +1,28 @@
+<% include parts/header %>
+<p style="color: black;">En förare har accepterat körningen...</p>
+<head>
+<script>
+window.onload = function(){
+  var theDelay = 3;
+  var timer = setTimeout("showText()",theDelay*1000)
+  var theDelay2 = 6;
+  var timer2 = setTimeout("showText2()",theDelay2*1000)
+}
+function showText(){
+  document.getElementById("delayedText").style.visibility = "visible";
+}
+function showText2(){
+  document.getElementById("delayedText2").style.visibility = "visible";
+}
+</script>
+</head>
+<body>
+<div id="delayedText" style="visibility:hidden">
+En förare är påväg...
+</div>
+<p></p>
+<div id="delayedText2" style="visibility:hidden">
+Din förare har ankommit!
+</div>
+</body>
+<% include parts/footer %>

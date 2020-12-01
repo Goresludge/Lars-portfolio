@@ -1,0 +1,38 @@
+<% include parts/header %>
+<div id="input">
+    <p>Från:<br><%=user.from.name%></p>
+    <p>Till:<br><%=user.to.name%></p>
+    <p>Tid:
+        <% if (user.time.now) { %>
+            <br>nu
+        <% } %>
+        <% if (!user.time.now) { %>
+            <br><%=user.time.t%>
+        <% } %>
+    </p>
+    <p>Specialbehov:
+        <br> <%= user.special.passengers %>
+        <% if (user.special.djur) { %>
+            <br>Djur
+        <% } %>
+        <% if (user.special.fardtjanst) { %>
+            <br>Färdtjänst
+        <% } %>
+        <% if (user.special.rullstolsbunden) { %>
+            <br>Rullstolsbunden
+        <% } %>
+        <% if (user.special.other) { %>
+            <br><%= user.special.otherData%>
+        <% } %>
+    </p>
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a href="/user/special">Tillbaka</a>
+    </div>
+    <div class="but_single but_right">
+        <a href="/user/waiting">Bekräfta</a>
+    </div>
+    <div class="clear"></div>
+</div>
+<% include parts/footer %>

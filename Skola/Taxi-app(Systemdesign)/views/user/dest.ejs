@@ -1,0 +1,91 @@
+<% include parts/header %>
+<div id="input">
+    <p>
+        <label>Från <br><input id="from" type="text" name="from" value="<%= user.from.name %>" /></label>
+    </p>
+    <p>
+        <label>Till <br><input id="to" type="text" name="to" value="<%= user.to.name %>" /></label>
+    </p>
+    <input type="hidden" name="fromLat" id="fromLat" value="<%= user.from.lat %>" >
+    <input type="hidden" name="fromLng" id="fromLng" value="<%= user.from.lng %>" >
+    <input type="hidden" name="toLat" id="toLat" value="<%= user.to.lat %>" >
+    <input type="hidden" name="toLng" id="toLng" value="<%= user.to.lng %>" >
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a href="/user/logout">Tillbaka</a>
+    </div>
+    <div class="but_single but_right">
+        <a href="#" onclick="nextForm()" >Nästa</a>
+    </div>
+    <div class="clear"></div>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCgvOaOEJ6i2nTf2IO7RNMQ9bA6olGi7g&libraries=places&callback=initAutocomplete" async defer></script>
+<script defer>
+    var autocomplete_from, autocomplete_to;
+    var location_from, location_to;
+
+    function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete_from = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('from')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete_from.addListener('place_changed', fillFromAddress);
+
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete_to = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('to')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete_to.addListener('place_changed', fillToAddress);
+    }
+
+    function fillFromAddress() {
+        location_from = autocomplete_from.getPlace();
+        var loc = location_from.geometry.location
+        document.getElementById('fromLat').value = loc.lat()
+        document.getElementById('fromLng').value = loc.lng()
+        console.log(location_from);
+    }
+    function fillToAddress() {
+        location_to = autocomplete_to.getPlace()
+        var loc = location_to.geometry.location
+        document.getElementById('toLat').value = loc.lat()
+        document.getElementById('toLng').value = loc.lng()
+        console.log(location_to);
+    }
+
+
+    function geolocate() {
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var google_map_position = new google.maps.LatLng( position.coords.latitude, position.coords.longitude);
+            var google_maps_geocoder = new google.maps.Geocoder();
+                google_maps_geocoder.geocode(
+                    { 'latLng': google_map_position },
+                    function( results, status ) {
+                        var place = results[0];
+                        document.getElementById('from').value = place.formatted_address;
+                        location_from = place;
+                        var loc = location_from.geometry.location
+                        document.getElementById('fromLat').value = loc.lat()
+                        document.getElementById('fromLng').value = loc.lng()
+                    }
+                );
+            
+        });
+        }
+    }
+    geolocate();
+
+    
+    
+</script>
+<% include parts/footer %>

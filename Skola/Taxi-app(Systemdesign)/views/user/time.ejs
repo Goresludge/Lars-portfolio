@@ -1,0 +1,34 @@
+<% include parts/header %>
+<div id="input">
+    <p>
+        <label><input type="radio" name="tid" id="nu" value="now" <% if (user.time.now) { %>checked <% } %> onchange="changeIt()" /> Åk nu</label>
+    </p>
+    <p>
+        <label><input type="radio" name="tid" id="senare" value="later" onchange="changeIt()" <% if (!user.time.now) { %>checked <% } %> /> Åk Senare</label>
+    </p>
+    <p>
+        <input type="time" id="time" name="time" style="display:none;" value="<%= user.time.t %>" />
+    </p>
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a href="/user/dest">Tillbaka</a>
+    </div>
+    <div class="but_single but_right">
+        <a href="#" onclick="nextForm()" >Nästa</a>
+    </div>
+    <div class="clear"></div>
+</div>
+<script defer>
+    function changeIt() {
+        var akSenare = document.getElementById("senare");
+        var time = document.getElementById("time");
+        if(akSenare.checked) {
+            time.style.display = "block";
+        } else {
+            time.style.display = "none";
+        }
+    }
+    changeIt()
+</script>
+<% include parts/footer %>

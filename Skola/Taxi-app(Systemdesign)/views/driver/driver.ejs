@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/styledriver.css">
+        <link rel="stylesheet" href="/leaflet/leaflet.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="/socket.io/socket.io.js" defer></script>
+        <script src="https://vuejs.org/js/vue.js" defer></script>
+        <script src="/leaflet/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <script src="https://vuejs.org/js/vue.js" defer></script>
+        <script src="/js/driver.js" defer></script>
+    </head>
+    <body>
+        <input type="hidden" id="email" value="<%= driver.email %>" >
+        <div id='taxi-app' :class="{logincontainer: !loggedIn}">
+            <div class="login-aligner" v-show="!loggedIn">
+                <div class="login-content">
+                    <h1>Logga in</h1>
+                    <p>Användarnamn:</p>
+                    <input v-model="user"></input>
+                    <p>Lösenord:</p>
+                    <input v-model="password" @keyup.enter="logIn"></input><br><br>
+                    <button @click="logIn">Logga in</button>
+                </div>\
+            </div>
+
+            <div class="main-interface" v-show="loggedIn">
+                <div class="headercontent">
+                    <div>
+                        
+                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <button style="margin: 10px;" @click="changeStatus(<%= driver.status %>)">Ändra status</button>
+                                <span> <%= driver.name %>: <%= driver.status %></span>
+                            </td>
+                            <td style="position: absolute; right: 0; margin: 10px;">
+                                <button style="float: right;" onclick="window.location = '/driver/logout'">Logga ut</button>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div class="maincontent">
+                    <div id="my-map">
+                    </div>
+                </div>
+                <div class="footercontent">
+                    <div class="mainbuttondiv">
+                        <button class="button declinebutton" v-show="incomingJob != ''">Avvisa</button>
+                        <button class="button mainbutton" @click="mainButtonFunc">{{ mainButtonText }}</button>
+                    </div>
+                    
+                    <div v-show="currentJob">
+                        <table style="margin-top: 20px; width: 100%">
+                            <tr>
+                                <td class="tdleft">Namn </td>
+                                <td class="tdright">{{ currentJob.username }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdleft">Hämtas </td>
+                                <td class="tdright" v-if="currentJob.from">{{ currentJob.from.name }}</td>
+                            </tr>
+                            
+                        </table>
+                        <div v-show="jobExpanded">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td class="tdleft">Lämnas </td>
+                                    <td class="tdright" v-if="currentJob.to">{{ currentJob.to.name }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="tdleft">Telefon </td>
+                                    <td class="tdright">{{ currentJob.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">Email </td>
+                                    <td class="tdright">{{ currentJob.email }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">Särsk. bhv </td>
+                                    <td class="tdright">{{ currentJob.special }}</td>
+                                </tr>
+                            </table>
+                            <div class="buttondiv">
+                                <button @click="orderFinished">{{ progressButtonText }}</button>
+                            </div>
+                            <div>
+                                <br><br>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div v-show="incomingJob">
+                        <p style="text-align: center; margin-top: 25px; margin-bottom: 0px; color: red;">Körning mottagen! Acceptera?</p>
+                        <table style="margin-top: 10px; width: 100%">
+                            <tr>
+                                <td class="tdleft">Namn </td>
+                                <td class="tdright">{{ incomingJob.username }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdleft">Hämtas </td>
+                                <td class="tdright" v-if="incomingJob.from">{{ incomingJob.from.name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdleft"b>Lämnas </td>
+                                <td class="tdright" v-if="incomingJob.to">{{ incomingJob.to.name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdleft">Telefon </td>
+                                <td class="tdright">{{ incomingJob.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdleft">Email </td>
+                                <td class="tdright">{{ incomingJob.email }}</td>
+                            </tr>
+                            <tr v-if="incomingJob.special">
+                                <td class="tdleft">Särsk. bhv </td>
+                                <td class="tdright">{{ incomingJob.special }}</td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

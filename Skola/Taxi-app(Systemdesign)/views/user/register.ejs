@@ -1,0 +1,38 @@
+<% include parts/header %>
+<div id="input">
+    <p>
+        <label for="name">Fullständigt namn</label>
+        <br/>
+        <input type="text" id="name" name="name">
+    </p>
+    <p>
+        <label for="phone">Telefonnummer</label>
+        <br/>
+        <input type="tel" id="phone" name="phone">
+    </p>
+    <p>
+        <label for="email">E-mail</label>
+        <br/>
+        <input type="email" id="email" name="email">
+    </p>
+    <p>
+        <label for="password">Lösenord</label>
+        <br/>
+        <input type="password" id="password" name="password">
+    </p>
+    <p>
+        <label for="confirmpassword">Bekräfta lösenord</label>
+        <br/>
+        <input type="password" id="confirmpassword" name="password2">
+    </p>
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a href="/user/login">Tillbaka</a>
+    </div>
+    <div class="but_single but_right">
+        <a onclick="nextForm()" href="#">Registrera</a>
+    </div>
+    <div class="clear"></div>
+</div>
+<% include parts/footer %>

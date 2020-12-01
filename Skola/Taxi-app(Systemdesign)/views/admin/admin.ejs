@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Administratör Taxi</title>
+        <link rel="stylesheet" type="text/css" href="/css/styleadmin.css">
+        <script src="https://vuejs.org/js/vue.js"></script>
+        <script src="/socket.io/socket.io.js" defer></script>
+        <link rel="stylesheet" href="/leaflet/leaflet.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="/leaflet/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <script src="/js/admin.js" defer></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="margin-left: 15px;">Taxi RajRaj</h1>
+            <div class="column" id="columnOrders">
+                <ul class="item-list">
+                    <li
+                        is="vc-order"
+                        v-for="(customer, index) in customers"
+                        v-bind="customer"
+                        :index="index"
+                        :active-order="selectedOrder"
+                        @remove="removeCustomer"
+                        @match="showDrivers"
+                        @activation-interface="setCurrentActive"
+                    ></li>
+                </ul>
+            </div>
+            <div class="column" id="columnDrivers">
+                <ul class="item-list">
+                    <li
+                        is="vc-drivers"
+                        v-for="(driver, index) in filterDrivers(drivers)"
+                        v-bind="driver"
+                        :selected-driver="selectedDriver"
+                        :index="index"
+                        @confirm="placeOrder"
+                        @activation-interface="setCurrentActive"
+                    ></li>
+                </ul>
+            </div>
+            <div id="page">
+                <div id="map" style="float:left; height:400px; width:500px;">
+                </div>
+            </div>
+            <div id="addManually">
+                <div class="order-style" style="height:auto; width:auto; float:left;" v-bind:class="{active:isActive}" @click="toggle_active">
+                  <p style="font-weight:bold;">Lägg till order</p>
+                        <div style="position:relative;" v-if="isActive">
+                          <input type="text" @click.stop id="newCustomerFrom" placeholder="Från*"><br>
+                          <input type="text" @click.stop id="newCustomerTo" placeholder="Till*"><br>
+                          <input type="text" @click.stop id="newCustomerPickup" placeholder="Hämtas klockan*"><br>
+                          <input type="text" @click.stop id="newCustomerPassengers" placeholder="Antal resenärer*"><br>
+                          <input type="text" @click.stop id="newCustomerName" placeholder="Namn*"><br>
+                          <input type="text" @click.stop id="newCustomerPhone" placeholder="Telefon*"><br>
+                          <input type="email" @click.stop id="newCustomerEmail" placeholder="E-mail"><br>
+                          <input type="text" @click.stop id="newCustomerSpecial" placeholder="Särskilda krav"><br>
+                          <input type="text" @click.stop id="newCustomerOther" placeholder="Övrigt"><br>
+                          <button class="button" @click.stop="addNewCustomerManual()">Lägg till manuellt</button>
+                        </div>
+                </div>
+            </div>
+        </main>
+
+    </body>
+
+</html>

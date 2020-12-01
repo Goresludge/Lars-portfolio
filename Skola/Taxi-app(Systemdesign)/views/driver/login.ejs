@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/css/styledriver.css">
+        <script src="/js/main.js"></script>
+    </head>
+    <body>
+        <form method="post" action="/driver/login" id="form" >
+        <div id='taxi-app' :class="{logincontainer: !loggedIn}">
+            <div class="login-aligner" v-show="!loggedIn">
+                <div class="login-content">
+                    <h1>Logga in</h1>
+                    <p>Användarnamn:</p>
+                    <input type="text" name="email" v-model="user"></input>
+                    <p>Lösenord:</p>
+                    <input type="password" v-model="password" @keyup.enter="logIn" name="password"></input><br><br>
+                    <button @click="nextForm()">Logga in</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </body>
+</html>

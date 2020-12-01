@@ -1,0 +1,21 @@
+<% include parts/header %>
+<div id="input">
+    <p>
+    <label for="Full name">Användarnamn</label><br>
+    <input type="text" id="username" name="username" required="required">
+    </p>
+    <p>
+    <label for="Password">Lösenord</label><br>
+    <input type="password" id="userPassword" name="password" required="required">
+    </p>
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a onclick="nextForm()" href="#">Logga in</a>
+    </div>
+    <div class="but_single but_right">
+        <a href="/user/register">Ny användare</a>
+    </div>
+    <div class="clear"></div>
+</div>
+<% include parts/footer %>

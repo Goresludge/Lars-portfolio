@@ -1,0 +1,43 @@
+<% include parts/header %>
+<div id="input">
+    <p>
+        <label>Passengers <input type="number" min="1" max="10" id="passengers" name="passengers" value="<%= user.special.passengers %>" /> </label>
+    </p>
+    <p>
+        <label><input type="checkbox" name="djur" <% if (user.special.djur) { %>checked <% } %> /> Djur </label>
+    </p>
+    <p>
+        <label><input type="checkbox" name="fardtjanst" <% if (user.special.fardtjanst) { %>checked <% } %> /> Färdtjänst </label>
+    </p>
+    <p>
+        <label><input type="checkbox" name="rullstolsbunden" <% if (user.special.rullstolsbunden) { %>checked <% } %> /> Rullstolsbunden </label>
+    </p>
+    <p>
+        <label><input type="checkbox" onchange="changeIt()" id="ovrigt" name="other" <% if (user.special.other) { %>checked <% } %> /> Övrigt </label>
+    </p>
+    <p>
+        <input type="text" id="other" style="display:none;" name="otherData" value="<%=user.special.otherData%>" />
+    </p>
+</div>
+<div id="buttons">
+    <div class="but_single but_left">
+        <a href="/user/time">Tillbaka</a>
+    </div>
+    <div class="but_single but_right">
+        <a href="#" onclick="nextForm()">Nästa</a>
+    </div>
+    <div class="clear"></div>
+</div>
+<script defer>
+    function changeIt() {
+        var ovrigt = document.getElementById("ovrigt");
+        var time = document.getElementById("other");
+        if(ovrigt.checked) {
+            time.style.display = "block";
+        } else {
+            time.style.display = "none";
+        }
+    }
+    changeIt()
+</script>
+<% include parts/footer %>
